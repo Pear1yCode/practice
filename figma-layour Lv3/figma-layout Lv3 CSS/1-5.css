@@ -1,0 +1,260 @@
+        /* 메인 영역 만들기 */
+        #main {
+            width : 1920px;
+            height : 2714px;
+        }
+
+        /* 헤더와 네비바 생성 */
+        #header {
+            width : 1920px;
+            height : 56px;
+        }
+
+        .color {
+            background: #000000;
+        }
+
+        #nav {
+            list-style-type: none;
+            color:white;
+            font-weight: 400;
+            font-size :16px;
+            line-height: 20.03px;
+            display: flex;
+            margin: 0;
+            padding-left: 10px;
+        }
+
+        #nav li {
+            padding : 17px 10px;
+        }
+
+        #white {
+            color : #ffffff;
+            float : right;
+            margin-top : -40px;
+            margin-right : 20px;
+        }
+        /* 처음 사각형 6개 */
+        #main01 {
+            width : 1920px;
+            height: 280px;
+            margin-top: 40px;
+            margin-left : 380px;
+        }
+
+        .new {
+            margin-left : 10px;
+            font-size :32px;
+            font-weight: 700;
+            line-height: 40.06px;
+        }
+
+        .radius {
+            width : 180px;
+            height : 180px;
+            background-color: #646464;
+            border-radius: 16px;
+            display: inline-block;
+            margin-left :5px;
+            margin-right :5px;
+            margin-top : -15px;
+        }
+        /* 두번째 사각형 3개 */
+        #main02 {
+            width : 1920px;
+            height: 500px;
+            margin-left : 380px;
+        }
+
+        .radius0 {
+            background-color:#646464;
+            width : 376px;
+            height : 400px;
+            border-radius: 16px;
+            display: inline-block;
+            margin-left :5px;
+            margin-right :5px;
+            margin-top : -15px; /* 각 사각형마다 이렇게 넣어야 글자 간격 동일 */
+        }
+        .secondfont {
+            position : absolute;
+            font-weight: 700;
+            font-size : 16px;
+            color : white;
+            margin-left: 25px;
+            line-height: 25px;
+        }
+
+        /* 세번째 사각형 4개 */
+        #main03 {
+            width : 1920px;
+            height: 500px;
+            margin-left : 380px;
+        }
+        .radius1 {
+            width : 278px;
+            height : 400px;
+            background-color: #646464;
+            border-radius: 16px;
+            display: inline-block;
+            margin-left :5px;
+            margin-right :5px;
+            margin-top : -15px;
+        }
+        .thirdfont {
+            font-weight: 400;
+            font-size : 16px;
+            color : white;
+            margin-left: 25px;
+            line-height: 25px;
+            margin-top : 270px;
+        }
+        #thirdspan {
+            font-size : 12px;
+        }
+        /* 네번째 사각형 5개 */
+        .radius2 {
+            width : 278px;
+            height : 200px;
+            background-color: #646464;
+            border-radius: 16px;
+            margin-left :5px;
+            margin-right :5px;
+            margin-top : -15px;
+        }
+        .forthfont {
+            font-weight: 700;
+            font-size : 24px;
+            color : white;
+            margin-left: 10px;
+            line-height: 30.05px;
+            margin-top : 10px;
+        }
+        #blank {
+            width : 600px;
+            height : 220px
+        }
+
+        #black01 {
+            width : 600px;
+            height: 200px;
+        }
+
+        #shape00 {
+            display: inline-block;
+        }
+        #shape01 {
+            display:inline-block;
+        }
+
+        #shape02 {
+            display: inline-block;
+        }
+
+        #shape03 {
+            float : left;
+        }
+/* display : inline-block을 사용하고 float를 사용하면 오류발생
+problems에서 확인하고 해결하면된다. (float를 사용하면 inline-block이 무시된다는 특성) */
+        #main041 {
+            float : left;
+        }
+
+        #main040 {
+            background-color: #646464;
+            width : 572px;
+            height : 416px;
+            border-radius: 16px;
+            display : inline-block;
+            margin-top : -10px;
+        }
+
+        #main4 {
+            width : 1920px;
+            height: 500px;
+            margin-left : 380px;
+        }
+        /* 빠른 링크 시작 */
+        #main6 {
+            width : 1920px;
+            height: 130px;
+
+            margin-left : 380px;
+        }
+
+        .radius3 {
+            width : 98px;
+            height : 50px;
+            background-color: #646464;
+            border-radius: 9999px;
+            margin-left :5px;
+            margin-right :5px;
+            margin-top : -15px;
+            text-align: center;
+            line-height: 25px;
+            display : inline-block;
+        }
+
+        .main6font {
+            font-family: arial;
+            color : white;
+            font-size : 14px;
+            font-weight: 700;
+        }
+
+        /* 마지막 : NEW 트렌드 ! */
+        #main7 {
+            width : 1920px;
+            height: 400px;
+            margin-left : 380px;
+        }
+
+        .newsquare {
+            width : 180px;
+            height : 240px;
+            background-color: #646464;
+            color:white;
+            border-radius: 16px;
+            margin-left :5px;
+            margin-right :5px;
+            margin-top : -15px;
+            line-height: 25px;
+            display: inline-block;
+        }
+
+        #circle {
+            width : 24px;
+            height: 24px;
+            border-radius: 9999px;
+            background-color: white;
+            position : absolute;
+            margin-top : 10px;
+            margin-left : 10px;
+        }
+
+        #last {
+            font-weight: 700;
+            font-size : 16px;
+            font-family: Arial, Helvetica, sans-serif;
+            position : absolute;
+            margin-top : 155px;
+            margin-left : 10px;
+        }
+
+        #font02 {
+            font-weight: 400;
+            font-size : 12px;
+        }
+        /* 푸터 */
+        #footer {
+            width : 1920px;
+            height : 80px;
+            background-color: black;
+            color : white;
+            text-align: center;
+            line-height: 80px;
+            font-family: Arial, Helvetica, sans-serif;
+            font-weight: 700;
+            font-size : 14px;
+        }
