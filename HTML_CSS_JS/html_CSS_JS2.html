@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>문제 풀이 2</title>
+</head>
+<style>
+    #screen {
+        width : 219px;
+        height : 200px;
+        text-align: center;
+        border : 1px solid black;
+        border-radius: 50px;
+        display : flex;
+        justify-content: center;
+        align-items: center;
+    }
+</style>
+<body>
+    <div id="screen"></div>
+    <div style="height:5px;"></div>
+    <input id="text" onkeyup="print()"><button id="btl">확인</button>
+    <script>
+        function print() {
+            document.getElementById('text').value;
+            document.getElementById("screen").innerText = text.value;
+        }
+    </script>
+</body>
+</html>
