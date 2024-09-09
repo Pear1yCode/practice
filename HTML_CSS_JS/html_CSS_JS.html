@@ -9,13 +9,14 @@
     <h1>시간이 10초인 타이머 생성하기</h1>
 
     <p id="timerTime">10</p>
-    <button>시작</button>
+    <button id = "btl" onclick="timer">시작</button>
     <script>
         let count = 10;
         let timer = setInterval(() => {
             timerTime.innerHTML=count;
-            if(count-- == 0) {
-                clearInterval(timer)
+            if(count-- === 0) {
+                clearInterval(timer);
+                alert("끝")
             }
         }, 1000)
 
