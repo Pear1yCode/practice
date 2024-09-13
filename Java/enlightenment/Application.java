@@ -29,16 +29,16 @@ public class Application {
         StudentClass firstStudent = students.get(0);
         firstStudent.printInfo();
 
-        StudentClass secondStudent = students.get(0);
+        StudentClass secondStudent = students.get(1);
         secondStudent.printInfo();
 
-        StudentClass thirdStudent = students.get(0);
+        StudentClass thirdStudent = students.get(2);
         thirdStudent.printInfo();
 
-        StudentClass forthStudent = students.get(0);
+        StudentClass forthStudent = students.get(3);
         forthStudent.printInfo();
 
-        StudentClass fifthStudent = students.get(0);
+        StudentClass fifthStudent = students.get(4);
         fifthStudent.printInfo();
     }
 }
