@@ -1,7 +1,7 @@
 package Java.testQuestion.maketree;
 
 import java.util.Scanner;
-
+// 혼자서 간단하게 만들어본 버전 (어느정도는 하겠지만 약간 부족함이 있어 제대로 된 트리를 만들기 어려웠다.
 public class Tree {
     StringBuilder sb = new StringBuilder();
 
