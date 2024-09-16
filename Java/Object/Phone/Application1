@@ -1,4 +1,4 @@
-package Java.Phone.Object;
+package Java.Object.Phone;
 
 import java.util.Scanner;
 
