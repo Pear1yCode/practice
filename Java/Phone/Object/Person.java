@@ -1,4 +1,4 @@
-package Java.Phone;
+package Java.Phone.Object;
 
 public class Person {
 
