@@ -101,15 +101,33 @@ SELECT
        A.EMP_NAME,
        A.JOB_CODE,
        A.DEPT_CODE,
-       A.HIRE_DATE
+       A.ENT_DATE
   FROM EMPLOYEE A
- WHERE JOB_CODE = (SELECT
-				          B.ENT_YN
-					  FROM EMPLOYEE B
-					 WHERE ENT_YN IN ('Y')
-                     GROUP BY DEPT_CODE;
+ WHERE A.DEPT_CODE AND A.JOB_CODE IN (SELECT
+											B.DEPT_CODE,
+                                            B.JOB_CODE
+									   FROM EMPLOYEE B
+									  WHERE B.DEPT_CODE IN ('D8') AND B.JOB_CODE IN ('6'));
+                                       -- Operand should contain 1 column(s) = 나 왼쪽에 컬럼이 하나여야 비교가능하다는 의미
+                                       -- 서브쿼리 SELECT문이 두개 이상이면 뜨는듯?
 
 -- 9. 급여 평균 3위 안에 드는 부서의 부서 코드와 부서명, 평균급여를 조회하세요.
 -- HINT!! limit
+SELECT
+       A.DEPT_CODE,
+       B.DEPT_TITLE,
+       AVG(SALARY)
+  FROM EMPLOYEE A
+  JOIN DEPARTMENT B ON A.DEPT_CODE = B.DEPT_ID
+  GROUP BY DEPT_CODE
+  LIMIT 3;
 
 -- 10. 부서별 급여 합계가 전체 급여의 총 합의 20%보다 많은 부서의 부서명과, 부서별 급여 합계를 조회하세요.
+SELECT
+       B.DEPT_TITLE,
+       SUM(A.SALARY)
+  FROM EMPLOYEE A
+  LEFT JOIN DEPARTMENT B ON A.DEPT_CODE = B.DEPT_ID
+ WHERE SUM(A.SALARY) > (SELECT
+						       SUM(C.SALARY)*0.2
+							FROM EMPLOYEE C);
