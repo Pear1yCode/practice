@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script crossorigin src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+</head>
+<style>
+    #all {
+        width : 1920px;
+        height: 1080px;
+        background-color: lightgrey;
+        display: flex;
+        justify-content: center;
+    }
+
+    #title {
+        background-color: black;
+        width:1920px;
+        height:120px;
+        text-align: center;
+        color:white;
+        line-height: 120px;
+        top:0px;
+        position: absolute;
+    }
+
+    #toDoList {
+        text-align: center;
+        line-height: 400px;
+        position: absolute;
+    }
+
+    .toDoInput {
+        position: absolute;
+        top: 523px;
+        left:140px;
+        height:20px;
+    }
+
+    .toDoBtn {
+        position:absolute;
+        top: 520px;
+        left:310px;
+        background-color: green;
+        color:white;
+        border-radius: 5px;
+        height:30px;
+    }
+
+    .toDoList {
+        margin-left: 10px;
+    }
+
+    #main {
+        position:absolute;
+        width:500px;
+        height: 500px;
+        border: 1px solid black;
+        background-color: white;
+        left:715px;
+        top:250px;
+    
+    }
+
+    #footer {
+        position:absolute;
+        bottom:0px;
+        background-color: black;
+        width:1920px;
+        height:120px;
+        color:white;
+        display:flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    li {
+        list-style: none;
+    }
+
+    .icon {
+        width:25px;
+        height:20px;
+        background-color: red;
+        border-radius: 20px;
+        justify-content: center;
+        align-items: center;
+        color:white;
+        border : none;
+        margin-left: 20px;
+    }
+
+    .icon:active {
+        background-color: blue;
+    }
+
+    .checked {
+        text-decoration-line : line-through;
+    }
+</style>
+<body>
+    <div id="root"></div>
+    <script type="text/babel">
+
+const { useState } = React;
+
+        function App() {
+            const [toDoList, setToDoList] = useState([
+                {id: 1, name:'할일 목록을 추가할 것'}
+            ]);
+                const [inputText, setInputText] = useState('');
+                const [nextId, setNextId] = useState(4);
+
+                const onChangeHandler = e => setInputText(e.target.value);
+
+                const onClickHandler = () => {
+                    const changedToDoList = toDoList.concat({
+                        id: nextId,
+                        name:inputText
+                    })
+
+                    setNextId(nextId +1);
+                    setToDoList(changedToDoList)
+                    setInputText('');
+                }
+
+                const onRemove = id => {
+                    const changeToDoList = toDoList.filter(toDo => toDo.id !== id);
+                    setToDoList(changeToDoList);
+                }
+
+                // 미흡했던 부분
+                const handleCheckbox = id => {
+                const updatedToDoList = toDoList.map(toDo => 
+                toDo.id === id ? { ...toDo, checked: !toDo.checked } : toDo
+                );
+                setToDoList(updatedToDoList);
+                }
+
+                // 이전에 쓴 부분
+                // const List = toDoList.map(toDo=><li key={toDo.id}
+                //                                             onRemove={() => onRemove(toDo.id)}>
+                //                                             <input checked={id.checked} type="checkbox" onChange={() => handleCheckbox(toDo.id)}/>
+                //                                             {toDo.name}<button onClick={() => onRemove(toDo.id)} className="icon">X</button></li>)
+
+                // 미흡했던 부분
+                const List = toDoList.map(toDo => 
+                <li key={toDo.id} className={toDo.checked ? "checked" : ""}>
+                    <input 
+                        type="checkbox" 
+                        checked={toDo.checked} 
+                        onChange={() => handleCheckbox(toDo.id)} 
+                        />
+                        {toDo.name}
+                    <button onClick={() => onRemove(toDo.id)} className="icon">X</button>
+                </li>
+                );
+
+            return (
+                <>
+                <input className="toDoInput" value={inputText} onChange={onChangeHandler}/>
+                <button className="toDoBtn" onClick={onClickHandler}>추가하기</button>
+                <ul className="toDoList">{List}</ul>
+                </>
+            )
+        }
+
+        const element = (
+        <>
+        <div id ="all">
+            <h1 id="title">오늘의 할일 {new Date().toLocaleDateString()}</h1>
+            <h3 id="toDoList">ToDo-List</h3>
+            <div id="main">
+                <App/>
+            </div>
+            <div id="footer">Copyright 2024. team-ohgiraffers all rights reserved.</div>
+            </div>
+        </>
+        );
+
+        ReactDOM.createRoot(document.getElementById('root')).render(element);
+
+        // 컴포넌트 2개 사용 -> 더 세분화 할 필요성
+    </script>
+</body>
+</html>
