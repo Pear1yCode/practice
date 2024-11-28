@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script crossorigin src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+</head>
+<body>
+    <div id="root"></div>
+    <script type="text/babel">
+
+        const { useState, useEffect } = React;
+
+        // function Answer () {
+        //     const [userInput, setUserInput] = useState('')
+
+        //     useEffect(() => {
+        //         const answer = prompt('원하는 문자를 입력해주세요.')
+        //         setUserInput(answer)
+        //     })
+        //     return <h1>{answer}</h1>
+        // }
+
+        // function Input () {
+        //     const [inputValue, setInputValue] = useState('');
+
+        //     // 이부분 이해가안감
+        //     const handleInput = (e) => {
+        //         setInputValue(e.target.value);
+        //     }
+
+        //     const handleEnter = (e) => {
+        //         if (e.key === 'Enter') {
+        //             if (inputValue === userInput)
+        //             alert('굳')
+        //         } else {
+        //             alert('틀림')
+        //         }
+        //     }
+
+        //     return <input
+        //             type="text"
+        //             value={inputValue}
+        //             onChange={handleInput}
+        //             onKeyDown={handleEnter}
+        //             />
+        // }
+
+        function App () {
+            
+
+            const [userInput, setUserInput] = useState('');
+            const [inputValue, setInputValue] = useState('');
+
+            const [timeTaken, setTimeTaken] = useState(null);
+            const [startTime, setStartTime] = useState(null);
+
+            useEffect(() => {
+            const start = Date.now(); // 타이머용
+            const answer = prompt('원하는 문자를 입력해주세요.'); //답변용
+            setUserInput(answer); // 답변용
+            setStartTime(start); // 타이머용
+            },
+            [] // 클리어할만한거없나?
+        )
+            // return <h1>{answer}</h1>
+
+            const handleInput = (e) => {
+                setInputValue(e.target.value);
+            }
+
+            const handleEnter = (e) => {
+                if (e.key === 'Enter' && startTime !== null) {
+                    const endTime = Date.now();
+                    const timeSpent = (endTime - startTime) / 1000;
+                    setTimeTaken(timeSpent);
+
+                    if (inputValue === userInput)
+                    alert(`${timeSpent.toFixed(1)}초`)
+                else 
+                    null;
+                }
+            }
+
+
+        return (
+            <>
+            <h1>{userInput}</h1>
+            <input
+                    type="text"
+                    value={inputValue}
+                    onChange={handleInput}
+                    onKeyDown={handleEnter}
+                    />
+                    </>
+        );
+        }
+        // 컴포넌트 나눠야하는데 나누니까 안된다.
+
+        ReactDOM.createRoot(document.getElementById('root')).render(<App/>)
+
+    </script>
+</body>
+</html>
