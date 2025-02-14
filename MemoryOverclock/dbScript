@@ -1,0 +1,45 @@
+CREATE TABLE memory_overclock (
+    id INT AUTO_INCREMENT PRIMARY KEY,   -- 게시물 고유 ID
+	cpu_manufacturer VARCHAR(255),          -- CPU 제조사
+    cpu_name VARCHAR(255),                  -- CPU 이름
+    title VARCHAR(255) NOT NULL,            -- 제목 (비워둘 수 없도록 설정)
+    system_memory_multiplier DECIMAL(5, 2),  -- 램클럭
+    infinity_fabric_frequency DECIMAL(5, 2), -- 동기화 클럭
+    uclk_div1_mode DECIMAL(5, 2),           -- 비율
+    vcore_soc DECIMAL(5, 2),                -- SOC 전압
+    cpu_vddio_mem DECIMAL(5, 2),            -- CPU VDDIO MEM
+    ddr_vdd_voltage DECIMAL(5, 2),          -- 램 전압
+    ddr_vddq_voltage DECIMAL(5, 2),         -- DDR VDDQ 전압
+    vddp DECIMAL(5, 2),                     -- VDDP
+    cas_latency INT,                        -- CAS Latency
+    trcd INT,                               -- tRCD
+    trp INT,                                -- tRP
+    tras INT,                               -- tRAS
+    trc INT,                                -- tRC
+    tw INT,                                 -- tW
+    tref INT,                               -- tREF
+    trfc1 INT,                              -- tRFC1
+    trfc2 INT,                              -- tRFC2
+    trfcsb INT,                             -- tRFCSb
+    trtp INT,                               -- tRTP
+    trrd_l INT,                             -- tRRD_L
+    trrd_s INT,                             -- tRRD_S
+    tfaw INT,                               -- tFAW
+    twtrl INT,                              -- tWTRL
+    twtrs INT,                              -- tWTRS
+    trdrd_scl INT,                          -- tRDRD_SCL
+    trdrdsc INT,                            -- tRDRDSC
+    trdrdsd INT,                            -- tRDRDSD
+    trdrddd INT,                            -- tRDRDDD
+    twrwr_scl INT,                          -- tWRWR_SCL
+    twrwrsc INT,                            -- tWRWRSC
+    twrwrsd INT,                            -- tWRWRSD
+    twrwrd INT,                             -- tWRWRDD
+    twrrd INT,                              -- tWRRD
+    trdwr INT,                              -- tRDWR
+    gear_down_mode BOOLEAN DEFAULT FALSE,  -- Gear Down Mode
+    power_down_mode BOOLEAN DEFAULT FALSE, -- Power Down Mode
+    author VARCHAR(255) DEFAULT 'auto',     -- 작성자, 기본값은 'auto'
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP, -- 작성일시
+    memo TEXT                                -- 비고 (자유 입력)
+);
