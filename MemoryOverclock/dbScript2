@@ -1,0 +1,45 @@
+CREATE TABLE memory_overclock (
+    id INT AUTO_INCREMENT PRIMARY KEY,        -- 게시물 고유 ID
+    cpu_manufacturer VARCHAR(255),  -- CPU 제조사
+    cpu_name VARCHAR(255),           -- CPU 이름
+    title VARCHAR(255) NOT NULL,                    -- 제목 (비워둘 수 없도록 설정)
+    system_memory_multiplier VARCHAR(255),  -- 램클럭
+    infinity_fabric_frequency VARCHAR(255) DEFAULT 'auto', -- 동기화 클럭
+    uclk_div1_mode VARCHAR(255) DEFAULT 'auto',           -- 비율
+    vcore_soc VARCHAR(255) DEFAULT 'auto',                -- SOC 전압
+    cpu_vddio_mem VARCHAR(255) DEFAULT 'auto',            -- CPU VDDIO MEM
+    ddr_vdd_voltage VARCHAR(255) DEFAULT 'auto',          -- 램 전압
+    ddr_vddq_voltage VARCHAR(255) DEFAULT 'auto',         -- DDR VDDQ 전압
+    vddp VARCHAR(255) DEFAULT 'auto',                     -- VDDP
+    cas_latency VARCHAR(255) DEFAULT 'auto',                        -- CAS Latency
+    trcd VARCHAR(255) DEFAULT 'auto',                               -- tRCD
+    trp VARCHAR(255) DEFAULT 'auto',                                -- tRP
+    tras VARCHAR(255) DEFAULT 'auto',                               -- tRAS
+    trc VARCHAR(255) DEFAULT 'auto',                                -- tRC
+    tw VARCHAR(255) DEFAULT 'auto',                                 -- tW
+    tref VARCHAR(255) DEFAULT 'auto',                               -- tREF
+    trfc1 VARCHAR(255) DEFAULT 'auto',                              -- tRFC1
+    trfc2 VARCHAR(255) DEFAULT 'auto',                              -- tRFC2
+    trfcsb VARCHAR(255) DEFAULT 'auto',                             -- tRFCSb
+    trtp VARCHAR(255) DEFAULT 'auto',                               -- tRTP
+    trrd_l VARCHAR(255) DEFAULT 'auto',                             -- tRRD_L
+    trrd_s VARCHAR(255) DEFAULT 'auto',                             -- tRRD_S
+    tfaw VARCHAR(255) DEFAULT 'auto',                               -- tFAW
+    twtrl VARCHAR(255) DEFAULT 'auto',                              -- tWTRL
+    twtrs VARCHAR(255) DEFAULT 'auto',                              -- tWTRS
+    trdrd_scl VARCHAR(255) DEFAULT 'auto',                          -- tRDRD_SCL
+    trdrdsc VARCHAR(255) DEFAULT 'auto',                            -- tRDRDSC
+    trdrdsd VARCHAR(255) DEFAULT 'auto',                            -- tRDRDSD
+    trdrddd VARCHAR(255) DEFAULT 'auto',                            -- tRDRDDD
+    twrwr_scl VARCHAR(255) DEFAULT 'auto',                          -- tWRWR_SCL
+    twrwrsc VARCHAR(255) DEFAULT 'auto',                            -- tWRWRSC
+    twrwrsd VARCHAR(255) DEFAULT 'auto',                            -- tWRWRSD
+    twrwrd VARCHAR(255) DEFAULT 'auto',                             -- tWRWRDD
+    twrrd VARCHAR(255) DEFAULT 'auto',                              -- tWRRD
+    trdwr VARCHAR(255) DEFAULT 'auto',                              -- tRDWR
+    gear_down_mode BOOLEAN DEFAULT FALSE,                 -- Gear Down Mode
+    power_down_mode BOOLEAN DEFAULT FALSE,                -- Power Down Mode
+    author VARCHAR(255) DEFAULT 'auto',                    -- 작성자, 기본값은 'auto'
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,       -- 작성일시
+    memo TEXT                              -- 비고 (자유 입력, 기본값 'auto')
+);
