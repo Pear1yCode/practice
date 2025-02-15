@@ -1,0 +1,141 @@
+/* 전체 페이지 스타일 */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+    color: #333;
+    display: block; /* 기본 레이아웃으로 변경 */
+    text-align: center; /* 중앙 정렬을 위한 텍스트 정렬 */
+}
+
+/* 컨테이너 - 중앙 정렬 및 여백 추가 */
+.container {
+    max-width: 900px;
+    width: 100%; /* 컨테이너가 화면 크기에 맞게 퍼지도록 */
+    margin: 40px auto; /* 화면에서 가운데 정렬 */
+    padding: 40px;
+    background-color: #ffffff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    box-sizing: border-box; /* 여백과 패딩이 전체 너비에 포함되도록 */
+}
+
+/* 상단 제목 */
+h1 {
+    text-align: center;
+    color: #2c3e50;
+    font-size: 2.5em;
+    margin-top: 0;
+    margin-bottom: 20px;
+}
+
+/* 상세 정보 제목 */
+h3 {
+    color: #34495e;
+    font-size: 1.8em;
+    margin-top: 30px;
+}
+
+/* 게시물 상세 내용 */
+p {
+    font-size: 1.1em;
+    line-height: 1.6;
+    margin: 10px 0;
+}
+
+/* 작성자, 작성일 스타일 */
+p strong {
+    color: #2980b9;
+}
+
+/* 세부 정보 리스트 */
+ul {
+    list-style-type: none;
+    margin: 20px 0;
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start; /* 왼쪽 정렬 */
+    text-align: left; /* 텍스트 왼쪽 정렬 */
+    max-width: 600px; /* ul의 최대 너비를 설정 */
+    margin: 0 auto; /* ul을 화면에서 중앙에 배치 */
+}
+
+/* 리스트 아이템 스타일 */
+ul li {
+    font-size: 1em;
+    line-height: 1.6;
+    margin-bottom: 15px;
+    display: flex;
+    justify-content: flex-start; /* 항목들을 왼쪽 정렬 */
+    align-items: center;
+    width: 100%; /* 리스트 항목들이 ul 너비를 꽉 채우도록 */
+}
+
+/* 리스트 항목 strong 태그 스타일 */
+ul li strong {
+    color: #e74c3c;
+    min-width: 180px; /* 제목 부분의 최소 너비 설정 */
+    text-align: left; /* 제목은 왼쪽 정렬 */
+    margin-right: 15px; /* 제목과 값 사이에 간격 추가 */
+}
+
+/* 리스트 항목 내용 스타일 */
+ul li span {
+    flex-grow: 1; /* 나머지 공간을 채움 */
+    text-align: left; /* 내용은 왼쪽 정렬 */
+}
+
+/* 링크 스타일 */
+a {
+    display: inline-block;
+    margin-top: 30px;
+    text-align: center;
+    background-color: #3498db;
+    color: white;
+    padding: 12px 30px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-size: 1.1em;
+    transition: background-color 0.3s ease;
+}
+
+a:hover {
+    background-color: #2980b9;
+}
+
+/* 미디어 쿼리 - 모바일 화면을 위한 설정 */
+@media screen and (max-width: 768px) {
+    /* 컨테이너 크기 및 여백 조정 */
+    .container {
+        padding: 20px;
+        margin: 20px; /* 모바일 화면에서 여백 추가 */
+    }
+
+    /* 제목 크기 조정 */
+    h1 {
+        font-size: 2em;
+        margin-bottom: 15px;
+    }
+
+    h3 {
+        font-size: 1.5em;
+    }
+
+    p {
+        font-size: 1em;
+    }
+
+    ul li {
+        font-size: 0.95em;
+    }
+
+    a {
+        padding: 10px 20px;
+        font-size: 1em;
+    }
+}
