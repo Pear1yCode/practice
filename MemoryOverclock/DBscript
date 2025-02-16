@@ -38,8 +38,8 @@ CREATE TABLE memory_overclock (
     twrwrd VARCHAR(255) DEFAULT 'AUTO',                             -- tWRWRDD
     twrrd VARCHAR(255) DEFAULT 'AUTO',                              -- tWRRD
     trdwr VARCHAR(255) DEFAULT 'AUTO',                              -- tRDWR
-    gear_down_mode BOOLEAN DEFAULT FALSE,                 -- Gear Down Mode
-    power_down_mode BOOLEAN DEFAULT FALSE,                -- Power Down Mode
+    gear_down_mode BOOLEAN,                 -- Gear Down Mode
+    power_down_mode BOOLEAN,                -- Power Down Mode
     author VARCHAR(255) DEFAULT 'AUTO',                    -- 작성자, 기본값은 'auto'
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,       -- 작성일시
     memo TEXT                              -- 비고 (자유 입력, 기본값 'auto')
