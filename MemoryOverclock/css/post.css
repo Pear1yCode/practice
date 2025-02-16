@@ -1,116 +1,135 @@
-/* 기본 스타일 설정 */
+/* 기본적인 스타일 설정 */
 body {
-    font-family: 'Arial', sans-serif;
+    font-family: Arial, sans-serif;
     background-color: #f4f4f4;
     margin: 0;
     padding: 0;
-    color: #333;
-    height: 100%;
 }
 
-/* 페이지 레이아웃을 더 넓고 가시성 높이기 */
+/* 전체 콘텐츠 감싸는 div */
 .container {
     width: 80%;
-    max-width: 900px; /* 화면이 너무 넓어지지 않도록 최대 너비 설정 */
-    margin: 50px auto; /* 중앙 정렬과 상단 여백 */
-    padding: 30px; /* 충분한 내부 여백 */
-    background-color: #ffffff;
-    border-radius: 12px; /* 둥근 모서리 */
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1); /* 그림자 효과로 입체감 */
-    font-size: 1.1rem; /* 전체 폰트 크기 살짝 키움 */
-    line-height: 1.7;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
 }
 
-/* 제목 */
+/* 헤더 스타일 */
 h1 {
-    color: #333;
-    font-size: 2.8rem;
-    border-bottom: 3px solid #2a9d8f;
-    padding-bottom: 10px;
-    margin-bottom: 30px; /* 제목과 본문 사이 여백 */
+    text-align: center;
+    font-size: 32px;
+    margin-bottom: 20px;
 }
 
-/* 작성자 및 작성일 */
-p {
-    font-size: 1.1rem;
-    line-height: 1.6;
-    color: #555;
-    margin: 10px 0;
-}
-
-/* 세부 항목 스타일 */
+/* 게시물 목록 스타일 */
 ul {
-    list-style: none;
+    list-style-type: none;
     padding: 0;
 }
 
 ul li {
-    font-size: 1.1rem;
-    padding: 12px 0;
+    padding: 10px;
     border-bottom: 1px solid #ddd;
 }
 
-ul li strong {
-    color: #2a9d8f; /* 강조 색상 */
+ul li:last-child {
+    border-bottom: none;
 }
 
-/* 세부 정보 제목 */
-h3 {
-    color: #333;
-    font-size: 2rem;
-    margin-top: 40px;
-    border-bottom: 2px solid #2a9d8f;
-    padding-bottom: 10px;
-}
-
-/* 비고 */
-strong {
-    color: #333;
-}
-
-/* 링크 스타일 */
-a {
-    display: inline-block;
-    margin-top: 30px;
-    color: #fff;
-    background-color: #2a9d8f;
+ul li a {
+    color: #007bff;
     text-decoration: none;
+    font-weight: bold;
+}
+
+ul li a:hover {
+    text-decoration: underline;
+}
+
+/* 버튼 스타일 */
+button {
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    display: block;
+    width: 200px;
+    margin: 0 auto;
+    margin-top: 20px;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+/* 폼 스타일 */
+#postForm {
+    margin-top: 20px;
+}
+
+/* input, select 스타일 */
+input[type="text"],
+textarea,
+select {
+    width: 90%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-sizing: border-box;
+    font-size: 16px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+
+/* textarea 스타일 (줄 바꿈을 위해) */
+textarea {
+    height: 100px;
+    resize: vertical;
+}
+
+/* 선택박스 가시성 개선 */
+select {
+    -webkit-appearance: none; /* Safari에서의 기본 스타일 없애기 */
+    -moz-appearance: none; /* Firefox에서의 기본 스타일 없애기 */
+    appearance: none; /* 모든 브라우저에서 기본 스타일 없애기 */
+    background-color: #f9f9f9;
+    background-image: url('data:image/svg+xml;charset=UTF-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%2210%22%20height%3D%2210%22%20viewBox%3D%220%200%2010%2010%22%3E%3Cpath%20d%3D%22M2%200L5%203L8%200H2Z%22%20fill%3D%22%23888%22/%3E%3C/svg%3E');
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+    background-size: 10px;
+}
+
+/* 필드 레이블 스타일 */
+label {
+    font-weight: bold;
+    margin-bottom: 8px;
+    display: block;
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* 제출 버튼 스타일 */
+button[type="submit"] {
+    background-color: #28a745;
+    color: white;
+    font-size: 18px;
     padding: 12px 20px;
-    border-radius: 5px;
-    text-align: center;
-    font-size: 1.2rem;
-    transition: background-color 0.3s, transform 0.3s;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-top: 20px;
+    width: 100%;
 }
 
-a:hover {
-    background-color: #1f8c7e;
-    transform: translateY(-3px); /* 살짝 올라가는 효과 */
-}
-
-/* 반응형 디자인 */
-@media screen and (max-width: 768px) {
-    .container {
-        width: 90%;
-        padding: 20px;
-    }
-
-    h1 {
-        font-size: 2.2rem;
-    }
-
-    h3 {
-        font-size: 1.7rem;
-    }
-
-    p {
-        font-size: 1rem;
-    }
-
-    ul li {
-        font-size: 1rem;
-    }
-
-    a {
-        font-size: 1.1rem;
-    }
+button[type="submit"]:hover {
+    background-color: #218838;
 }
