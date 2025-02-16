@@ -17,7 +17,7 @@ CREATE TABLE memory_overclock (
     trp VARCHAR(255) DEFAULT 'AUTO',                                -- tRP
     tras VARCHAR(255) DEFAULT 'AUTO',                               -- tRAS
     trc VARCHAR(255) DEFAULT 'AUTO',                                -- tRC
-    tw VARCHAR(255) DEFAULT 'AUTO',                                 -- tW
+    twr VARCHAR(255) DEFAULT 'AUTO',                                 -- tW
     tref VARCHAR(255) DEFAULT 'AUTO',                               -- tREF
     trfc1 VARCHAR(255) DEFAULT 'AUTO',                              -- tRFC1
     trfc2 VARCHAR(255) DEFAULT 'AUTO',                              -- tRFC2
