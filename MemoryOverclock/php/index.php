@@ -13,7 +13,7 @@
 </head>
 <body>
 <header>
-    <h1>환영합니다! My PHP 웹사이트</h1>
+    <h1>Memory OverClock !</h1>
 </header>
 
 <main>

@@ -43,35 +43,69 @@ function getPosts() {
     return $posts ? $posts : [];  // 빈 배열 반환 처리
 }
 
-function addPost($title, $content, $cpu_manufacturer, $cpu_name, $memo) {
-    global $pdo;  // PDO 객체를 가져옴
+function addPost($title, $content, $cpu_manufacturer, $cpu_name, $system_memory_multiplier, $infinity_fabric_frequency, $uclk_div1_mode, $vcore_soc, $cpu_vddio_mem, $ddr_vdd_voltage, $ddr_vddq_voltage, $vddp, $cas_latency, $trcd, $trp, $tras, $trc, $twr, $tref, $trfc1, $trfc2, $trfcsb, $trtp, $trrd_l, $trrd_s, $tfaw, $twtrl, $twtrs, $trdrd_scl, $trdrdsc, $trdrdsd, $trdrddd, $twrwr_scl, $twrwrsc, $twrwrsd, $twrwrd, $twrrd, $trdwr, $gear_down_mode, $power_down_mode, $author, $memo) {
+    global $pdo; // PDO 객체 사용
 
+    // SQL 쿼리 준비
+    $sql = "INSERT INTO memory_overclock (title, content, cpu_manufacturer, cpu_name, system_memory_multiplier, infinity_fabric_frequency, uclk_div1_mode, vcore_soc, cpu_vddio_mem, ddr_vdd_voltage, ddr_vddq_voltage, vddp, cas_latency, trcd, trp, tras, trc, twr, tref, trfc1, trfc2, trfcsb, trtp, trrd_l, trrd_s, tfaw, twtrl, twtrs, trdrd_scl, trdrdsc, trdrdsd, trdrddd, twrwr_scl, twrwrsc, twrwrsd, twrwrd, twrrd, trdwr, gear_down_mode, power_down_mode, author, memo) 
+            VALUES (:title, :content, :cpu_manufacturer, :cpu_name, :system_memory_multiplier, :infinity_fabric_frequency, :uclk_div1_mode, :vcore_soc, :cpu_vddio_mem, :ddr_vdd_voltage, :ddr_vddq_voltage, :vddp, :cas_latency, :trcd, :trp, :tras, :trc, :twr, :tref, :trfc1, :trfc2, :trfcsb, :trtp, :trrd_l, :trrd_s, :tfaw, :twtrl, :twtrs, :trdrd_scl, :trdrdsc, :trdrdsd, :trdrddd, :twrwr_scl, :twrwrsc, :twrwrsd, :twrwrd, :twrrd, :trdwr, :gear_down_mode, :power_down_mode, :author, :memo)";
+
+    // 준비된 쿼리 실행
+    $stmt = $pdo->prepare($sql);
+
+    // 파라미터 바인딩
+    $stmt->bindParam(':title', $title);
+    $stmt->bindParam(':content', $content);
+    $stmt->bindParam(':cpu_manufacturer', $cpu_manufacturer);
+    $stmt->bindParam(':cpu_name', $cpu_name);
+    $stmt->bindParam(':system_memory_multiplier', $system_memory_multiplier);
+    $stmt->bindParam(':infinity_fabric_frequency', $infinity_fabric_frequency);
+    $stmt->bindParam(':uclk_div1_mode', $uclk_div1_mode);
+    $stmt->bindParam(':vcore_soc', $vcore_soc);
+    $stmt->bindParam(':cpu_vddio_mem', $cpu_vddio_mem);
+    $stmt->bindParam(':ddr_vdd_voltage', $ddr_vdd_voltage);
+    $stmt->bindParam(':ddr_vddq_voltage', $ddr_vddq_voltage);
+    $stmt->bindParam(':vddp', $vddp);
+    $stmt->bindParam(':cas_latency', $cas_latency);
+    $stmt->bindParam(':trcd', $trcd);
+    $stmt->bindParam(':trp', $trp);
+    $stmt->bindParam(':tras', $tras);
+    $stmt->bindParam(':trc', $trc);
+    $stmt->bindParam(':twr', $twr);
+    $stmt->bindParam(':tref', $tref);
+    $stmt->bindParam(':trfc1', $trfc1);
+    $stmt->bindParam(':trfc2', $trfc2);
+    $stmt->bindParam(':trfcsb', $trfcsb);
+    $stmt->bindParam(':trtp', $trtp);
+    $stmt->bindParam(':trrd_l', $trrd_l);
+    $stmt->bindParam(':trrd_s', $trrd_s);
+    $stmt->bindParam(':tfaw', $tfaw);
+    $stmt->bindParam(':twtrl', $twtrl);
+    $stmt->bindParam(':twtrs', $twtrs);
+    $stmt->bindParam(':trdrd_scl', $trdrd_scl);
+    $stmt->bindParam(':trdrdsc', $trdrdsc);
+    $stmt->bindParam(':trdrdsd', $trdrdsd);
+    $stmt->bindParam(':trdrddd', $trdrddd);
+    $stmt->bindParam(':twrwr_scl', $twrwr_scl);
+    $stmt->bindParam(':twrwrsc', $twrwrsc);
+    $stmt->bindParam(':twrwrsd', $twrwrsd);
+    $stmt->bindParam(':twrwrd', $twrwrd);
+    $stmt->bindParam(':twrrd', $twrrd);
+    $stmt->bindParam(':trdwr', $trdwr);
+    $stmt->bindParam(':gear_down_mode', $gear_down_mode);
+    $stmt->bindParam(':power_down_mode', $power_down_mode);
+    $stmt->bindParam(':author', $author);
+    $stmt->bindParam(':memo', $memo);
+
+    // 쿼리 실행
     try {
-        // 비어있는 값 체크
-        if (empty($title) || empty($content) || empty($cpu_manufacturer) || empty($cpu_name)) {
-            throw new Exception("필수 항목이 비어 있습니다.");
+        if ($stmt->execute()) {
+            return true;
+        } else {
+            throw new Exception('쿼리 실행 오류: ' . implode(' ', $stmt->errorInfo()));
         }
-
-        // 쿼리문 준비
-        $sql = "INSERT INTO memory_overclock (title, content, cpu_manufacturer, cpu_name, memo)
-                VALUES (:title, :content, :cpu_manufacturer, :cpu_name, :memo)";
-
-        $stmt = $pdo->prepare($sql);
-
-        // 파라미터 바인딩
-        $stmt->bindParam(':title', $title);
-        $stmt->bindParam(':content', $content);
-        $stmt->bindParam(':cpu_manufacturer', $cpu_manufacturer);
-        $stmt->bindParam(':cpu_name', $cpu_name);
-        $stmt->bindParam(':memo', $memo);
-
-        // 쿼리 실행
-        return $stmt->execute();
-
     } catch (Exception $e) {
-        // 예외가 발생하면 false 반환하고 오류 메시지 출력
-        echo "Error: " . $e->getMessage();
-        return false;
+        return '오류 발생: ' . $e->getMessage();  // 에러 메시지를 반환
     }
 }
 

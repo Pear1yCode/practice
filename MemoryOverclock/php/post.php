@@ -9,20 +9,24 @@ $posts = getPosts();  // getPosts() 함수 호출하여 게시물 목록을 가�
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['title']) && isset($_POST['content'])) {
     $title = $_POST['title'];  // 사용자가 입력한 제목
     $content = $_POST['content'];  // 사용자가 입력한 내용
-    $cpu_manufacturer = !empty($_POST['cpu_manufacturer']) ? $_POST['cpu_manufacturer'] : 'auto';  // CPU 제조사
-    $cpu_name = !empty($_POST['cpu_name']) ? $_POST['cpu_name'] : 'auto';  // CPU 이름
-    $memo = !empty($_POST['memo']) ? $_POST['memo'] : 'auto';  // 비고
+    $cpu_manufacturer = !empty($_POST['cpu_manufacturer']) ? $_POST['cpu_manufacturer'] : 'AUTO';  // CPU 제조사
+    $cpu_name = !empty($_POST['cpu_name']) ? $_POST['cpu_name'] : 'AUTO';  // CPU 이름
 
     // 추가된 필드들
     $system_memory_multiplier = !empty($_POST['system_memory_multiplier']) ? $_POST['system_memory_multiplier'] : 'AUTO';
     $infinity_fabric_frequency = !empty($_POST['infinity_fabric_frequency']) ? $_POST['infinity_fabric_frequency'] : 'AUTO';
+    $uclk_div1_mode = !empty($_POST['uclk_div1_mode']) ? $_POST['uclk_div1_mode'] : 'AUTO';
+    $cpu_vddio_mem = !empty($_POST['cpu_vddio_mem']) ? $_POST['cpu_vddio_mem'] : 'AUTO'; // CPU VDDIO MEM
+    $ddr_vdd_voltage = !empty($_POST['ddr_vdd_voltage']) ? $_POST['ddr_vdd_voltage'] : 'AUTO'; // 램 전압
+    $ddr_vddq_voltage = !empty($_POST['ddr_vddq_voltage']) ? $_POST['ddr_vddq_voltage'] : 'AUTO'; // DDR VDDQ 전압
+    $vddp = !empty($_POST['vddp']) ? $_POST['vddp'] : 'AUTO'; // VDDP
     $vcore_soc = !empty($_POST['vcore_soc']) ? $_POST['vcore_soc'] : 'AUTO';
     $cas_latency = !empty($_POST['cas_latency']) ? $_POST['cas_latency'] : 'AUTO';
     $trcd = !empty($_POST['trcd']) ? $_POST['trcd'] : 'AUTO';
     $trp = !empty($_POST['trp']) ? $_POST['trp'] : 'AUTO';
     $tras = !empty($_POST['tras']) ? $_POST['tras'] : 'AUTO';
     $trc = !empty($_POST['trc']) ? $_POST['trc'] : 'AUTO';
-    $tw = !empty($_POST['tw']) ? $_POST['tw'] : 'AUTO';
+    $twr = !empty($_POST['twr']) ? $_POST['twr'] : 'AUTO';
     $tref = !empty($_POST['tref']) ? $_POST['tref'] : 'AUTO';
     $trfc1 = !empty($_POST['trfc1']) ? $_POST['trfc1'] : 'AUTO';
     $trfc2 = !empty($_POST['trfc2']) ? $_POST['trfc2'] : 'AUTO';
@@ -43,21 +47,24 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['title']) && isset($_PO
     $twrwrd = !empty($_POST['twrwrd']) ? $_POST['twrwrd'] : 'AUTO';
     $twrrd = !empty($_POST['twrrd']) ? $_POST['twrrd'] : 'AUTO';
     $trdwr = !empty($_POST['trdwr']) ? $_POST['trdwr'] : 'AUTO';
-    $gear_down_mode = isset($_POST['gear_down_mode']) ? $_POST['gear_down_mode'] : 'AUTO';  // Gear Down Mode
-    $power_down_mode = isset($_POST['power_down_mode']) ? $_POST['power_down_mode'] : 'AUTO';  // Power Down Mode
+    $gear_down_mode = $_POST['gear_down_mode'] ?? 'AUTO';  // Gear Down Mode
+    $power_down_mode = $_POST['power_down_mode'] ?? 'AUTO';  // Power Down Mode
+    $author = !empty($_POST['author']) ? $_POST['author'] : 'auto'; // Author memo
+    $memo = !empty($_POST['memo']) ? $_POST['memo'] : 'auto'; // Author memo
 
     // 게시물 추가 함수 호출
-    $result = addPost($title, $content, $cpu_manufacturer, $cpu_name, $memo,
-        $system_memory_multiplier, $infinity_fabric_frequency,
-        $vcore_soc, $cas_latency, $trcd, $trp, $tras, $trc, $tw, $tref,
+    $result = addPost($title, $content, $cpu_manufacturer, $cpu_name,
+        $system_memory_multiplier, $infinity_fabric_frequency, $uclk_div1_mode,
+        $vcore_soc, $cpu_vddio_mem, $ddr_vdd_voltage, $ddr_vddq_voltage, $vddp, $cas_latency, $trcd, $trp, $tras, $trc, $twr, $tref,
         $trfc1, $trfc2, $trfcsb, $trtp, $trrd_l, $trrd_s, $tfaw, $twtrl,
         $twtrs, $trdrd_scl, $trdrdsc, $trdrdsd, $trdrddd, $twrwr_scl,
         $twrwrsc, $twrwrsd, $twrwrd, $twrrd, $trdwr, $gear_down_mode,
-        $power_down_mode);
-    if ($result) {
+        $power_down_mode, $author, $memo);
+
+    if ($result === true) {
         echo "<script>alert('게시물이 성공적으로 추가되었습니다.'); window.location.href='post.php';</script>";
     } else {
-        echo "게시물 추가에 실패했습니다.";
+        echo "<script>alert('{$result}'); window.location.href='post.php';</script>";  // 오류 메시지를 알림창에 출력
     }
 }
 ?>
@@ -258,6 +265,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['title']) && isset($_PO
             <option value="4000">4000</option>
         </select><br>
 
+        <label for="uclk_div1_mode">uclk_div1_mode:</label>
+        <select id="uclk_div1_mode" name="uclk_div1_mode"></select>
+
         <label for="vcore_soc">SOC 전압 (V):</label>
         <select id="vcore_soc" name="vcore_soc"></select>
 
@@ -272,6 +282,42 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['title']) && isset($_PO
                 selectElement.appendChild(option);
             }
         </script><br>
+
+        <!-- CPU VDDIO MEM -->
+        <label for="cpu_vddio_mem">CPU VDDIO MEM 전압 (V):</label>
+        <select id="cpu_vddio_mem" name="cpu_vddio_mem">
+            <option value="AUTO">AUTO</option>
+            <option value="1.1">1.1 V</option>
+            <option value="1.2">1.2 V</option>
+            <option value="1.3">1.3 V</option>
+            <option value="1.4">1.4 V</option>
+        </select><br>
+
+        <!-- DDR VDD 전압 -->
+        <label for="ddr_vdd_voltage">DDR VDD 전압 (V):</label>
+        <select id="ddr_vdd_voltage" name="ddr_vdd_voltage">
+            <option value="AUTO">AUTO</option>
+            <option value="1.2">1.2 V</option>
+            <option value="1.35">1.35 V</option>
+            <option value="1.4">1.4 V</option>
+        </select><br>
+
+        <!-- DDR VDDQ 전압 -->
+        <label for="ddr_vddq_voltage">DDR VDDQ 전압 (V):</label>
+        <select id="ddr_vddq_voltage" name="ddr_vddq_voltage">
+            <option value="AUTO">AUTO</option>
+            <option value="1.2">1.2 V</option>
+            <option value="1.35">1.35 V</option>
+        </select><br>
+
+        <!-- VDDP 전압 -->
+        <label for="vddp">VDDP 전압 (V):</label>
+        <select id="vddp" name="vddp">
+            <option value="AUTO">AUTO</option>
+            <option value="1.0">1.0 V</option>
+            <option value="1.1">1.1 V</option>
+            <option value="1.2">1.2 V</option>
+        </select><br>
 
         <label for="cas_latency">CAS Latency:</label>
         <input type="text" id="cas_latency" name="cas_latency" placeholder="AUTO"><br>
@@ -288,8 +334,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['title']) && isset($_PO
         <label for="trc">tRC:</label>
         <input type="text" id="trc" name="trc" placeholder="AUTO"><br>
 
-        <label for="tw">tW:</label>
-        <input type="text" id="tw" name="tw" placeholder="AUTO"><br>
+        <label for="tw">tWR:</label>
+        <input type="text" id="tw" name="twr" placeholder="AUTO"><br>
 
         <label for="tref">tREF:</label>
         <input type="text" id="tref" name="tref" placeholder="AUTO"><br>
@@ -365,8 +411,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['title']) && isset($_PO
             <option value="disabled">Disabled</option>
         </select><br>
 
-        <label for="memo">비고:</label>
-        <textarea id="memo" name="memo"></textarea><br>
+        <label for="author">작성자:</label>
+        <input type="text" id="author" name="author" required><br>
+
+        <label for="memo">메모:</label>
+        <textarea id="memo" name="memo" required></textarea><br>
+
 
         <button type="submit">게시물 추가</button>
     </form>

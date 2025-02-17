@@ -48,12 +48,16 @@ if (isset($_GET['id'])) {
     <li><strong>램 클럭 (MHz):</strong> <?php echo htmlspecialchars($post['system_memory_multiplier']); ?></li>
     <li><strong>동기화 클럭 (MHz):</strong> <?php echo htmlspecialchars($post['infinity_fabric_frequency']); ?></li>
     <li><strong>SOC 전압 (V):</strong> <?php echo htmlspecialchars($post['vcore_soc']); ?></li>
+    <li><strong>CPU VDDIO MEM 전압 (V):</strong> <?php echo htmlspecialchars($post['cpu_vddio_mem']); ?></li>
+    <li><strong>DDR VDD 전압 (V):</strong> <?php echo htmlspecialchars($post['ddr_vdd_voltage']); ?></li>
+    <li><strong>DDR VDDQ 전압 (V):</strong> <?php echo htmlspecialchars($post['ddr_vddq_voltage']); ?></li>
+    <li><strong>VDDP 전압 (V):</strong> <?php echo htmlspecialchars($post['vddp']); ?></li>
     <li><strong>CAS Latency:</strong> <?php echo htmlspecialchars($post['cas_latency']); ?></li>
     <li><strong>tRCD:</strong> <?php echo htmlspecialchars($post['trcd']); ?></li>
     <li><strong>tRP:</strong> <?php echo htmlspecialchars($post['trp']); ?></li>
     <li><strong>tRAS:</strong> <?php echo htmlspecialchars($post['tras']); ?></li>
     <li><strong>tRC:</strong> <?php echo htmlspecialchars($post['trc']); ?></li>
-    <li><strong>tW:</strong> <?php echo htmlspecialchars($post['tw']); ?></li>
+    <li><strong>tWR:</strong> <?php echo htmlspecialchars($post['twr']); ?></li>
     <li><strong>tREF:</strong> <?php echo htmlspecialchars($post['tref']); ?></li>
     <li><strong>tRFC1:</strong> <?php echo htmlspecialchars($post['trfc1']); ?></li>
     <li><strong>tRFC2:</strong> <?php echo htmlspecialchars($post['trfc2']); ?></li>
@@ -74,8 +78,43 @@ if (isset($_GET['id'])) {
     <li><strong>tWRWRDD:</strong> <?php echo htmlspecialchars($post['twrwrd']); ?></li>
     <li><strong>tWRRD:</strong> <?php echo htmlspecialchars($post['twrrd']); ?></li>
     <li><strong>tRDWR:</strong> <?php echo htmlspecialchars($post['trdwr']); ?></li>
-    <li><strong>Gear Down Mode:</strong> <?php echo $post['gear_down_mode'] ? 'Yes' : 'No'; ?></li>
-    <li><strong>Power Down Mode:</strong> <?php echo $post['power_down_mode'] ? 'Yes' : 'No'; ?></li>
+    <li><strong>Gear Down Mode:</strong>
+        <?php
+        switch($post['gear_down_mode']) {
+            case 'auto':
+                echo 'AUTO';
+                break;
+            case 'enabled':
+                echo 'Enabled';
+                break;
+            case 'disabled':
+                echo 'Disabled';
+                break;
+            default:
+                echo 'AUTO';  // 값을 찾을 수 없는 경우 "No"
+        }
+        ?>
+    </li>
+
+    <li><strong>Power Down Mode:</strong>
+        <?php
+        // power_down_mode 값에 맞춰 출력
+        switch($post['power_down_mode']) {
+            case 'auto':
+                echo 'AUTO';
+                break;
+            case 'enabled':
+                echo 'Enabled';
+                break;
+            case 'disabled':
+                echo 'Disabled';
+                break;
+            default:
+                echo 'AUTO';  // 값을 찾을 수 없는 경우 "No"
+        }
+        ?>
+    </li>
+
 </ul>
 
 <p><strong>비고:</strong> <?php echo nl2br(htmlspecialchars($post['memo'])); ?></p>
