@@ -29,18 +29,76 @@ try {
     exit;
 }
 
-function getPosts() {
+function getPosts($page = 1, $posts_per_page = 5) {
     global $pdo;
 
-    // 쿼리문 준비
-    $sql = "SELECT * FROM memory_overclock ORDER BY created_at DESC";
+    // 게시물의 총 개수를 구하는 쿼리 (테이블 이름을 memory_overclock으로 수정)
+    $total_posts_query = "SELECT COUNT(*) AS total FROM memory_overclock";
+    $total_result = $pdo->query($total_posts_query);
+    $total_row = $total_result->fetch(PDO::FETCH_ASSOC); // PDO에서 fetch_assoc 대신 fetch 사용
+    $total_posts = $total_row['total'];
 
-    // 쿼리 실행
-    $stmt = $pdo->query($sql);
+    // 전체 페이지 수 계산
+    $total_pages = ceil($total_posts / $posts_per_page);
 
-    // 결과 반환
-    $posts = $stmt->fetchAll(PDO::FETCH_ASSOC);
-    return $posts ? $posts : [];  // 빈 배열 반환 처리
+    // 현재 페이지와 해당 페이지에 표시할 게시물의 범위 계산
+    $offset = ($page - 1) * $posts_per_page;
+
+    // 게시물 리스트 쿼리 (페이지네이션 적용, 테이블 이름을 memory_overclock으로 수정)
+    $query = "SELECT * FROM memory_overclock ORDER BY created_at DESC LIMIT $offset, $posts_per_page";
+    $result = $pdo->query($query);
+
+    // 게시물 목록 반환
+    return [
+        'posts' => $result->fetchAll(PDO::FETCH_ASSOC), // fetch_all 대신 fetchAll 사용
+        'total_pages' => $total_pages
+    ];
+}
+
+function generatePaginationLinks($current_page, $total_pages) {
+    $pagination = "";
+    $pages_per_group = 5;  // 한 번에 보여줄 페이지 번호 수
+    $start_page = floor(($current_page - 1) / $pages_per_group) * $pages_per_group + 1;
+    $end_page = min($start_page + $pages_per_group - 1, $total_pages);
+
+    // '처음' 버튼
+    if ($current_page > 1) {
+        $pagination .= "<a href='?page=1'>처음</a> ";
+    } else {
+        $pagination .= "<span class='disabled'>처음</span> ";
+    }
+
+    // '이전' 버튼
+    if ($current_page > 1) {
+        $pagination .= "<a href='?page=" . ($current_page - 1) . "'>◀</a> ";
+    } else {
+        $pagination .= "<span class='disabled'>◀</span> ";
+    }
+
+    // 페이지 번호들 (5개씩 그룹으로 출력)
+    for ($i = $start_page; $i <= $end_page; $i++) {
+        if ($i == $current_page) {
+            $pagination .= "<strong class='current-page'>$i</strong> ";
+        } else {
+            $pagination .= "<a href='?page=$i'>$i</a> ";
+        }
+    }
+
+    // '다음' 버튼
+    if ($current_page < $total_pages) {
+        $pagination .= "<a href='?page=" . ($current_page + 1) . "'>▶</a> ";
+    } else {
+        $pagination .= "<span class='disabled'>▶</span> ";
+    }
+
+    // '끝' 버튼
+    if ($current_page < $total_pages) {
+        $pagination .= "<a href='?page=$total_pages'>끝</a>";
+    } else {
+        $pagination .= "<span class='disabled'>끝</span>";
+    }
+
+    return $pagination;
 }
 
 function addPost($title, $content, $cpu_manufacturer, $cpu_name, $system_memory_multiplier, $infinity_fabric_frequency, $uclk_div1_mode, $vcore_soc, $cpu_vddio_mem, $ddr_vdd_voltage, $ddr_vddq_voltage, $vddp, $cas_latency, $trcd, $trp, $tras, $trc, $twr, $tref, $trfc1, $trfc2, $trfcsb, $trtp, $trrd_l, $trrd_s, $tfaw, $twtrl, $twtrs, $trdrd_scl, $trdrdsc, $trdrdsd, $trdrddd, $twrwr_scl, $twrwrsc, $twrwrsd, $twrwrd, $twrrd, $trdwr, $gear_down_mode, $power_down_mode, $author, $memo) {
@@ -107,6 +165,69 @@ function addPost($title, $content, $cpu_manufacturer, $cpu_name, $system_memory_
     } catch (Exception $e) {
         return '오류 발생: ' . $e->getMessage();  // 에러 메시지를 반환
     }
+}
+
+function SearchPost($search) {
+    global $pdo;
+
+    // 기본적으로 검색어가 제공되지 않으면 빈 문자열로 초기화
+    $search = '%' . $search . '%';
+
+    // SQL 쿼리 작성: 하나의 검색어로 여러 필드를 검색
+    $sql = "
+        SELECT * FROM memory_overclock
+        WHERE title LIKE :search
+        OR content LIKE :search
+        OR cpu_manufacturer LIKE :search
+        OR cpu_name LIKE :search
+        OR system_memory_multiplier LIKE :search
+        OR infinity_fabric_frequency LIKE :search
+        OR uclk_div1_mode LIKE :search
+        OR vcore_soc LIKE :search
+        OR cpu_vddio_mem LIKE :search
+        OR ddr_vdd_voltage LIKE :search
+        OR ddr_vddq_voltage LIKE :search
+        OR vddp LIKE :search
+        OR cas_latency LIKE :search
+        OR trcd LIKE :search
+        OR trp LIKE :search
+        OR tras LIKE :search
+        OR trc LIKE :search
+        OR twr LIKE :search
+        OR tref LIKE :search
+        OR trfc1 LIKE :search
+        OR trfc2 LIKE :search
+        OR trfcsb LIKE :search
+        OR trtp LIKE :search
+        OR trrd_l LIKE :search
+        OR trrd_s LIKE :search
+        OR tfaw LIKE :search
+        OR twtrl LIKE :search
+        OR twtrs LIKE :search
+        OR trdrd_scl LIKE :search
+        OR trdrdsc LIKE :search
+        OR trdrdsd LIKE :search
+        OR trdrddd LIKE :search
+        OR twrrd LIKE :search
+        OR trdwr LIKE :search
+        OR gear_down_mode LIKE :search
+        OR power_down_mode LIKE :search
+        OR author LIKE :search
+        OR memo LIKE :search
+    ";
+
+    // DB 연결
+    $stmt = $pdo->prepare($sql);
+
+    // 파라미터 바인딩
+    $stmt->bindParam(':search', $search);
+
+    // 쿼리 실행
+    $stmt->execute();
+
+    // 결과 반환
+    $posts = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    return $posts;
 }
 
 // 게시물 ID로 특정 게시물 조회

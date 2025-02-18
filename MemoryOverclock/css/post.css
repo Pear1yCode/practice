@@ -4,72 +4,94 @@ body {
     background-color: #f4f4f4;
     margin: 0;
     padding: 0;
+    color: #333;
 }
 
 /* 전체 콘텐츠 감싸는 div */
 .container {
-    width: 80%;
+    width: 90%;
+    max-width: 1000px;
     margin: 0 auto;
-    padding: 20px;
+    padding: 30px;
     background-color: #fff;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    border-radius: 8px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    border-radius: 12px;
+    background: linear-gradient(135deg, #f9f9f9, #e6f1f6);
+    transition: all 0.4s ease-in-out;
 }
 
 /* 헤더 스타일 */
 h1 {
     text-align: center;
-    font-size: 32px;
+    font-size: 36px;
     margin-bottom: 20px;
+    color: #2a2a2a;
+    font-weight: 700;
+    transition: color 0.3s ease-in-out;
 }
 
 /* 게시물 목록 스타일 */
 ul {
     list-style-type: none;
     padding: 0;
+    margin: 0;
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto;
 }
 
+/* 게시물 항목 스타일 */
 ul li {
-    padding: 10px;
+    padding: 20px;
     border-bottom: 1px solid #ddd;
+    margin-bottom: 15px;
+    font-size: 16px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-ul li:last-child {
-    border-bottom: none;
+ul li:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
 }
 
+/* 게시물 항목 제목 */
 ul li a {
+    font-size: 18px;
     color: #007bff;
     text-decoration: none;
-    font-weight: bold;
+    transition: color 0.3s ease-in-out;
 }
 
 ul li a:hover {
+    color: #0056b3;
     text-decoration: underline;
 }
 
 /* 버튼 스타일 */
 button {
-    padding: 10px 20px;
-    font-size: 16px;
+    padding: 12px 24px;
+    font-size: 18px;
     background-color: #007bff;
     color: #fff;
     border: none;
-    border-radius: 4px;
+    border-radius: 30px;
     cursor: pointer;
     display: block;
-    width: 200px;
-    margin: 0 auto;
-    margin-top: 20px;
+    margin: 20px auto;
+    transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
 button:hover {
     background-color: #0056b3;
+    transform: scale(1.05);
 }
 
 /* 폼 스타일 */
 #postForm {
-    margin-top: 20px;
+    margin-top: 30px;
 }
 
 /* input, select 스타일 */
@@ -77,44 +99,37 @@ input[type="text"],
 textarea,
 select {
     width: 90%;
-    padding: 10px;
-    margin: 10px 0;
+    padding: 14px;
+    margin: 12px 0;
     border: 1px solid #ddd;
-    border-radius: 4px;
-    box-sizing: border-box;
+    border-radius: 6px;
     font-size: 16px;
     display: block;
     margin-left: auto;
     margin-right: auto;
+    transition: border-color 0.3s ease-in-out;
 }
 
+input[type="text"]:focus,
+textarea:focus,
+select:focus {
+    border-color: #007bff;
+}
 
 /* textarea 스타일 (줄 바꿈을 위해) */
 textarea {
-    height: 100px;
+    height: 120px;
     resize: vertical;
 }
 
 /* 선택박스 가시성 개선 */
 select {
-    -webkit-appearance: none; /* Safari에서의 기본 스타일 없애기 */
-    -moz-appearance: none; /* Firefox에서의 기본 스타일 없애기 */
-    appearance: none; /* 모든 브라우저에서 기본 스타일 없애기 */
-    background-color: #f9f9f9;
+    appearance: none;
+    background-color: #f4f6f9;
     background-image: url('data:image/svg+xml;charset=UTF-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%2210%22%20height%3D%2210%22%20viewBox%3D%220%200%2010%2010%22%3E%3Cpath%20d%3D%22M2%200L5%203L8%200H2Z%22%20fill%3D%22%23888%22/%3E%3C/svg%3E');
     background-repeat: no-repeat;
-    background-position: right 10px center;
+    background-position: right 12px center;
     background-size: 10px;
-}
-
-/* 필드 레이블 스타일 */
-label {
-    font-weight: bold;
-    margin-bottom: 8px;
-    display: block;
-    width: 90%;
-    margin-left: auto;
-    margin-right: auto;
 }
 
 /* 제출 버튼 스타일 */
@@ -122,14 +137,153 @@ button[type="submit"] {
     background-color: #28a745;
     color: white;
     font-size: 18px;
-    padding: 12px 20px;
+    padding: 14px 24px;
     border: none;
-    border-radius: 4px;
+    border-radius: 30px;
     cursor: pointer;
     margin-top: 20px;
     width: 100%;
+    transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
 button[type="submit"]:hover {
     background-color: #218838;
+    transform: scale(1.05);
 }
+
+/* 페이지네이션 전체 스타일 */
+.pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+    padding: 20px 0;
+}
+
+/* 각 페이지네이션 버튼 스타일 */
+.pagination a,
+.pagination .disabled,
+.pagination .current-page {
+    display: inline-block;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    color: #007bff;
+    border: 2px solid #007bff;
+    border-radius: 50px;
+    font-size: 18px;
+    font-weight: 600;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.pagination a:hover:not(.disabled),
+.pagination .current-page:hover {
+    background-color: #007bff;
+    color: white;
+    transform: scale(1.1);
+}
+
+/* 비활성화된 버튼 스타일 */
+.pagination .disabled {
+    color: #ccc;
+    border-color: #ccc;
+    cursor: not-allowed;
+}
+
+/* 현재 페이지 강조 스타일 */
+.pagination .current-page {
+    background-color: #007bff;
+    color: white;
+    font-weight: 700;
+}
+
+/* 페이지 번호 호버 시 스타일 */
+.pagination a:hover:not(.disabled),
+.pagination .current-page:hover {
+    background-color: #0056b3;
+    color: white;
+}
+
+/* '이전', '다음' 버튼 스타일 */
+.pagination .previous,
+.pagination .next {
+    font-weight: bold;
+}
+
+/* 페이지네이션의 첫 번째와 마지막 버튼 */
+.pagination .first,
+.pagination .last {
+    font-size: 14px;
+    font-weight: bold;
+}
+
+/* 검색 버튼 스타일 */
+.search-container button {
+    padding: 8px 16px; /* 패딩 줄이기 */
+    font-size: 14px; /* 글자 크기 줄이기 */
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 25px; /* 둥근 모서리 */
+    cursor: pointer;
+    transition: all 0.3s ease;
+    width: auto;
+}
+
+/* 버튼 호버 효과 */
+.search-container button:hover {
+    background-color: #0056b3;
+    transform: scale(1.05);
+}
+
+
+/* 미디어 쿼리 - 모바일 대응 */
+@media screen and (max-width: 768px) {
+    body {
+        padding: 20px;
+    }
+
+    .container {
+        width: 100%;
+        padding: 15px;
+    }
+
+    h1 {
+        font-size: 28px;
+    }
+
+    .pagination a,
+    .pagination .disabled,
+    .pagination .current-page {
+        font-size: 16px;
+    }
+
+    ul li {
+        padding: 15px;
+    }
+
+    input[type="text"],
+    textarea,
+    select {
+        width: 100%;
+    }
+}
+
+/* 검색 버튼 스타일 */
+.search-container button {
+    padding: 8px 16px; /* 패딩 줄이기 */
+    font-size: 14px; /* 글자 크기 줄이기 */
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 25px; /* 둥근 모서리 */
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+/* 버튼 호버 효과 */
+.search-container button:hover {
+    background-color: #0056b3;
+    transform: scale(1.05);
+}
+

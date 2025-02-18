@@ -3,7 +3,30 @@
 require_once '../db/postDB.php';
 
 // 게시물 목록을 가져옵니다.
-$posts = getPosts();  // getPosts() 함수 호출하여 게시물 목록을 가져옴
+$page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
+
+// 게시물 조회
+$result = getPosts($page, 5);
+
+$page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
+
+// 사용자가 입력한 검색어를 받음
+$search = isset($_GET['search']) ? $_GET['search'] : '';
+
+// 검색된 결과 가져오기
+$posts = SearchPost($search);
+
+// 게시물 목록을 가져옵니다.
+if (empty($search)) {
+    // 검색어가 비어있을 경우, 모든 게시물을 가져옵니다.
+    $result = getPosts($page, 5);
+} else {
+    // 검색어가 있을 경우, 검색된 게시물만 가져옵니다.
+    $result = [
+        'posts' => $posts,
+        'total_pages' => ceil(count($posts) / 5),  // 페이지 수는 검색 결과에 맞게 계산
+    ];
+}
 
 // 새 게시물이 제출되었을 때 처리하는 부분
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['title']) && isset($_POST['content'])) {
@@ -67,6 +90,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['title']) && isset($_PO
         echo "<script>alert('{$result}'); window.location.href='post.php';</script>";  // 오류 메시지를 알림창에 출력
     }
 }
+
+
 ?>
 
 <!DOCTYPE html>
@@ -135,9 +160,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['title']) && isset($_PO
 
 <h1>게시물 목록</h1>
 <ul>
-    <?php if (!empty($posts)): ?>
-        <?php foreach ($posts as $post): ?>
+    <?php if (!empty($result['posts'])): ?>
+        <?php foreach ($result['posts'] as $post): ?>
             <li>
+                <!-- 제목을 클릭하면 post_detail.php로 이동 -->
                 <a href="post_detail.php?id=<?php echo $post['id']; ?>">
                     <strong><?php echo htmlspecialchars($post['title']); ?></strong>
                 </a><br>
@@ -150,6 +176,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['title']) && isset($_PO
     <?php endif; ?>
 </ul>
 
+<!-- 페이지네이션 링크 출력 -->
+<div class="pagination">
+    <?php echo generatePaginationLinks($page, $result['total_pages']); ?>
+</div>
+
+<form action="post.php" method="GET">
+    <input type="text" name="search" placeholder="검색어 입력" value="<?= isset($_GET['search']) ? $_GET['search'] : '' ?>">
+    <button type="submit">검색</button>
+</form>
 
 <!-- 비밀번호 입력 팝업을 통해 게시물 작성 폼 보이기 -->
 <button onclick="openPasswordPrompt()">게시물 작성</button>
