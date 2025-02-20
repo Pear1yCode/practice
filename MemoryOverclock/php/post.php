@@ -1,47 +1,34 @@
 <?php
-// postDB.php 파일을 불러옵니다.
 require_once '../db/postDB.php';
 
-// 게시물 목록을 가져옵니다.
-$page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
-
-// 게시물 조회
-$result = getPosts($page, 5);
+include 'header.php';
 
 $page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
 
-// 사용자가 입력한 검색어를 받음
 $search = isset($_GET['search']) ? $_GET['search'] : '';
 
-// 검색된 결과 가져오기
-$posts = SearchPost($search);
+$posts_per_page = 5;
 
-// 게시물 목록을 가져옵니다.
-if (empty($search)) {
-    // 검색어가 비어있을 경우, 모든 게시물을 가져옵니다.
-    $result = getPosts($page, 5);
+if ($search) {
+    $posts = SearchPost($search, $page, $posts_per_page);
+    $totalPosts = countSearchPosts($search);
 } else {
-    // 검색어가 있을 경우, 검색된 게시물만 가져옵니다.
-    $result = [
-        'posts' => $posts,
-        'total_pages' => ceil(count($posts) / 5),  // 페이지 수는 검색 결과에 맞게 계산
-    ];
+    $posts = [];
+    $totalPosts = 0;
 }
 
-// 새 게시물이 제출되었을 때 처리하는 부분
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['title']) && isset($_POST['content'])) {
     $title = $_POST['title'];  // 사용자가 입력한 제목
     $content = $_POST['content'];  // 사용자가 입력한 내용
-    $cpu_manufacturer = !empty($_POST['cpu_manufacturer']) ? $_POST['cpu_manufacturer'] : 'AUTO';  // CPU 제조사
-    $cpu_name = !empty($_POST['cpu_name']) ? $_POST['cpu_name'] : 'AUTO';  // CPU 이름
+    $cpu_manufacturer = !empty($_POST['cpu_manufacturer']) ? $_POST['cpu_manufacturer'] : 'AUTO';
+    $cpu_name = !empty($_POST['cpu_name']) ? $_POST['cpu_name'] : 'AUTO';
 
-    // 추가된 필드들
     $system_memory_multiplier = !empty($_POST['system_memory_multiplier']) ? $_POST['system_memory_multiplier'] : 'AUTO';
     $infinity_fabric_frequency = !empty($_POST['infinity_fabric_frequency']) ? $_POST['infinity_fabric_frequency'] : 'AUTO';
     $uclk_div1_mode = !empty($_POST['uclk_div1_mode']) ? $_POST['uclk_div1_mode'] : 'AUTO';
-    $cpu_vddio_mem = !empty($_POST['cpu_vddio_mem']) ? $_POST['cpu_vddio_mem'] : 'AUTO'; // CPU VDDIO MEM
-    $ddr_vdd_voltage = !empty($_POST['ddr_vdd_voltage']) ? $_POST['ddr_vdd_voltage'] : 'AUTO'; // 램 전압
-    $ddr_vddq_voltage = !empty($_POST['ddr_vddq_voltage']) ? $_POST['ddr_vddq_voltage'] : 'AUTO'; // DDR VDDQ 전압
+    $cpu_vddio_mem = !empty($_POST['cpu_vddio_mem']) ? $_POST['cpu_vddio_mem'] : 'AUTO';
+    $ddr_vdd_voltage = !empty($_POST['ddr_vdd_voltage']) ? $_POST['ddr_vdd_voltage'] : 'AUTO';
+    $ddr_vddq_voltage = !empty($_POST['ddr_vddq_voltage']) ? $_POST['ddr_vddq_voltage'] : 'AUTO';
     $vddp = !empty($_POST['vddp']) ? $_POST['vddp'] : 'AUTO'; // VDDP
     $vcore_soc = !empty($_POST['vcore_soc']) ? $_POST['vcore_soc'] : 'AUTO';
     $cas_latency = !empty($_POST['cas_latency']) ? $_POST['cas_latency'] : 'AUTO';
@@ -70,12 +57,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['title']) && isset($_PO
     $twrwrd = !empty($_POST['twrwrd']) ? $_POST['twrwrd'] : 'AUTO';
     $twrrd = !empty($_POST['twrrd']) ? $_POST['twrrd'] : 'AUTO';
     $trdwr = !empty($_POST['trdwr']) ? $_POST['trdwr'] : 'AUTO';
-    $gear_down_mode = $_POST['gear_down_mode'] ?? 'AUTO';  // Gear Down Mode
-    $power_down_mode = $_POST['power_down_mode'] ?? 'AUTO';  // Power Down Mode
-    $author = !empty($_POST['author']) ? $_POST['author'] : 'auto'; // Author memo
-    $memo = !empty($_POST['memo']) ? $_POST['memo'] : 'auto'; // Author memo
+    $gear_down_mode = $_POST['gear_down_mode'] ?? 'AUTO';
+    $power_down_mode = $_POST['power_down_mode'] ?? 'AUTO';
+    $author = !empty($_POST['author']) ? $_POST['author'] : 'auto';
+    $memo = !empty($_POST['memo']) ? $_POST['memo'] : 'auto';
 
-    // 게시물 추가 함수 호출
     $result = addPost($title, $content, $cpu_manufacturer, $cpu_name,
         $system_memory_multiplier, $infinity_fabric_frequency, $uclk_div1_mode,
         $vcore_soc, $cpu_vddio_mem, $ddr_vdd_voltage, $ddr_vddq_voltage, $vddp, $cas_latency, $trcd, $trp, $tras, $trc, $twr, $tref,
@@ -87,11 +73,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['title']) && isset($_PO
     if ($result === true) {
         echo "<script>alert('게시물이 성공적으로 추가되었습니다.'); window.location.href='post.php';</script>";
     } else {
-        echo "<script>alert('{$result}'); window.location.href='post.php';</script>";  // 오류 메시지를 알림창에 출력
+        echo "<script>alert('{$result}'); window.location.href='post.php';</script>";
     }
 }
 
+// 페이지네이션 계산
+$totalPages = ceil($totalPosts / $posts_per_page);
 
+// 결과 배열 설정
+// 이 부분을 다시 출력 형태로 설정
 ?>
 
 <!DOCTYPE html>
@@ -103,12 +93,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['title']) && isset($_PO
     <title>게시물</title>
     <script>
         function openPasswordPrompt() {
-            // 비밀번호를 묻는 팝업 창
             var password = prompt("비밀번호를 입력하세요:");
 
-            // 비밀번호가 맞으면 게시물 작성 폼을 보여주기
             if (password === "0000") {
-                document.getElementById("postForm").style.display = "block"; // 게시물 작성 폼 보이기
+                document.getElementById("postForm").style.display = "block";
             } else {
                 alert("잘못된 비밀번호입니다.");
             }
@@ -119,11 +107,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['title']) && isset($_PO
             const cpuManufacturer = document.getElementById("cpu_manufacturer").value;
             const cpuNameSelect = document.getElementById("cpu_name");
 
-            // 기존 옵션을 초기화
             cpuNameSelect.innerHTML = '';
 
             if (cpuManufacturer === "Intel") {
-                // Intel 선택 시 나타날 CPU 목록
                 const options = [
                     { value: "14700K", text: "Intel 14700K" },
                     { value: "14700KF", text: "Intel 14700KF" },
@@ -136,7 +122,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['title']) && isset($_PO
                     cpuNameSelect.appendChild(optElement);
                 });
             } else if (cpuManufacturer === "AMD") {
-                // AMD 선택 시 나타날 CPU 목록
                 const options = [
                     { value: "9950x", text: "AMD 9950X" },
                     { value: "7800x3d", text: "AMD 7800X3D" },
@@ -160,10 +145,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['title']) && isset($_PO
 
 <h1>게시물 목록</h1>
 <ul>
-    <?php if (!empty($result['posts'])): ?>
-        <?php foreach ($result['posts'] as $post): ?>
+    <?php if (empty($search)): ?>
+        <li>검색어가 없습니다.</li>
+    <?php elseif (!empty($posts)): ?>
+        <?php foreach ($posts as $post): ?>
             <li>
-                <!-- 제목을 클릭하면 post_detail.php로 이동 -->
                 <a href="post_detail.php?id=<?php echo $post['id']; ?>">
                     <strong><?php echo htmlspecialchars($post['title']); ?></strong>
                 </a><br>
@@ -176,20 +162,31 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['title']) && isset($_PO
     <?php endif; ?>
 </ul>
 
-<!-- 페이지네이션 링크 출력 -->
+
+
 <div class="pagination">
-    <?php echo generatePaginationLinks($page, $result['total_pages']); ?>
+    <?php
+
+    // 현재 페이지와 전체 페이지 수를 계산
+    $current_page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
+    $total_pages = ceil($totalPosts / $posts_per_page);
+
+    // 검색어 처리
+    $search = isset($_GET['search']) ? $_GET['search'] : '';
+
+    // 페이지네이션 생성 함수 호출
+    echo generatePagination($current_page, $total_pages, $search);
+    ?>
 </div>
 
-<form action="post.php" method="GET">
-    <input type="text" name="search" placeholder="검색어 입력" value="<?= isset($_GET['search']) ? $_GET['search'] : '' ?>">
+
+<form action="post.php" method="GET" class="search-container">
+    <input type="text" name="search" placeholder="통합검색" value="<?= isset($_GET['search']) ? $_GET['search'] : '' ?>">
     <button type="submit">검색</button>
 </form>
 
-<!-- 비밀번호 입력 팝업을 통해 게시물 작성 폼 보이기 -->
 <button onclick="openPasswordPrompt()">게시물 작성</button>
 
-<!-- 게시물 작성 폼 (초기에는 숨겨져 있음) -->
 <div id="postForm" style="display:none;">
     <h2>새 게시물 작성</h2>
     <form method="POST" action="post.php">
@@ -214,7 +211,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['title']) && isset($_PO
 
         <label for="system_memory_multiplier">램 클럭 (MHz):</label>
         <select id="system_memory_multiplier" name="system_memory_multiplier">
-            <!-- 4000에서 12000까지 100 단위로 램 클럭을 선택하도록 설정 -->
             <?php
             for ($i = 4000; $i <= 12000; $i += 100) {
                 echo "<option value=\"$i\">$i MHz</option>";
