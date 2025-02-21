@@ -13,8 +13,8 @@ if ($search) {
     $posts = SearchPost($search, $page, $posts_per_page);
     $totalPosts = countSearchPosts($search);
 } else {
-    $posts = [];
-    $totalPosts = 0;
+    $posts = getPosts($page, $posts_per_page);
+    $totalPosts = countAllPosts();
 }
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['title']) && isset($_POST['content'])) {
@@ -76,12 +76,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['title']) && isset($_PO
         echo "<script>alert('{$result}'); window.location.href='post.php';</script>";
     }
 }
-
-// 페이지네이션 계산
 $totalPages = ceil($totalPosts / $posts_per_page);
 
-// 결과 배열 설정
-// 이 부분을 다시 출력 형태로 설정
 ?>
 
 <!DOCTYPE html>
@@ -145,22 +141,27 @@ $totalPages = ceil($totalPosts / $posts_per_page);
 
 <h1>게시물 목록</h1>
 <ul>
-    <?php if (empty($search)): ?>
-        <li>검색어가 없습니다.</li>
-    <?php elseif (!empty($posts)): ?>
+    <?php if ($search && empty($posts)): ?>
+        <li>검색어에 맞는 게시물이 없습니다.</li>
+    <?php elseif (empty($posts)): ?>
+        <li>전체 게시물이 없습니다.</li>
+    <?php else: ?>
         <?php foreach ($posts as $post): ?>
             <li>
                 <a href="post_detail.php?id=<?php echo $post['id']; ?>">
-                    <strong><?php echo htmlspecialchars($post['title']); ?></strong>
+                    <strong>
+                        <?php echo isset($post['title']) ? htmlspecialchars($post['title']) : '제목 없음'; ?>
+                    </strong>
                 </a><br>
-                <?php echo nl2br(htmlspecialchars($post['content'])); ?><br>
-                <small><?php echo $post['created_at']; ?></small>
+                <?php echo isset($post['content']) ? nl2br(htmlspecialchars($post['content'])) : '내용 없음'; ?><br>
+                <small>
+                    <?php echo isset($post['created_at']) ? $post['created_at'] : '날짜 없음'; ?>
+                </small>
             </li>
         <?php endforeach; ?>
-    <?php else: ?>
-        <li>게시물이 없습니다.</li>
     <?php endif; ?>
 </ul>
+
 
 
 

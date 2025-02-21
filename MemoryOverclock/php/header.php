@@ -11,6 +11,7 @@
     <div class="logo">
         <a href="/">홈페이지</a>
     </div>
+    <button class="toggle-btn" onclick="toggleSidebar()">☰</button> <!-- 버튼 추가 -->
     <nav>
         <ul>
             <li><a href="/">홈</a></li>
@@ -20,5 +21,16 @@
         </ul>
     </nav>
 </header>
+
+<script>
+    function toggleSidebar() {
+        const sidebar = document.querySelector('header.sidebar');
+        const content = document.querySelector('.content');
+
+        sidebar.classList.toggle('collapsed');
+        content.classList.toggle('collapsed');
+    }
+</script>
+
 </body>
 </html>
