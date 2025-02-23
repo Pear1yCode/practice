@@ -150,20 +150,17 @@ $totalPages = ceil($totalPosts / $posts_per_page);
             <li>
                 <a href="post_detail.php?id=<?php echo $post['id']; ?>">
                     <strong>
-                        <?php echo isset($post['title']) ? htmlspecialchars($post['title']) : '제목 없음'; ?>
+                        <?php echo !empty($post['title']) ? htmlspecialchars($post['title']) : '제목 없음'; ?>
                     </strong>
                 </a><br>
-                <?php echo isset($post['content']) ? nl2br(htmlspecialchars($post['content'])) : '내용 없음'; ?><br>
+                <?php echo !empty($post['content']) ? nl2br(htmlspecialchars($post['content'])) : '내용 없음'; ?><br>
                 <small>
-                    <?php echo isset($post['created_at']) ? $post['created_at'] : '날짜 없음'; ?>
+                    <?php echo !empty($post['created_at']) ? $post['created_at'] : '날짜 없음'; ?>
                 </small>
             </li>
         <?php endforeach; ?>
     <?php endif; ?>
 </ul>
-
-
-
 
 <div class="pagination">
     <?php

@@ -28,42 +28,38 @@ try {
 function getPosts($page = 1, $posts_per_page = 5) {
     global $pdo;
 
+    // 총 게시물 수를 구하는 쿼리
     $total_posts_query = "SELECT COUNT(*) AS total FROM memory_overclock";
-    $total_result = $pdo->query($total_posts_query);
+    $result = $pdo->query($total_posts_query);
 
-    // 쿼리 실행 결과 확인
-    if (!$total_result) {
-        die("쿼리 실패: " . implode(' ', $pdo->errorInfo()));
-    }
-
-    $total_row = $total_result->fetch(PDO::FETCH_ASSOC);
-    $total_posts = $total_row['total'];
-
-    $total_pages = ceil($total_posts / $posts_per_page);
-
-    $offset = ($page - 1) * $posts_per_page;
-
-    // 실제 데이터 가져오기 쿼리
-    $query = "SELECT * FROM memory_overclock ORDER BY created_at DESC LIMIT $offset, $posts_per_page";
-    $result = $pdo->query($query);
-
-    // 쿼리 실행 결과 확인
     if (!$result) {
         die("쿼리 실패: " . implode(' ', $pdo->errorInfo()));
     }
 
-    $posts = $result->fetchAll(PDO::FETCH_ASSOC);
+    $total_row = $result->fetch(PDO::FETCH_ASSOC);
+    $total_posts = $total_row['total'];
 
-    if (empty($posts)) {
-        echo "게시물이 없습니다.";  // 게시물이 없을 경우
+    // 전체 페이지 수 계산
+    $total_pages = ceil($total_posts / $posts_per_page);
+
+    // 페이지 번호에 맞는 offset 계산
+    $offset = ($page - 1) * $posts_per_page;
+
+    // 전체 게시물 데이터를 가져오는 쿼리
+    $query = "SELECT * FROM memory_overclock ORDER BY created_at DESC LIMIT $offset, $posts_per_page";
+    $result = $pdo->query($query);
+
+    // 쿼리 실행 실패 체크
+    if (!$result) {
+        die("쿼리 실패: " . implode(' ', $pdo->errorInfo()));
     }
 
-    return [
-        'posts' => $posts,
-        'total_pages' => $total_pages
-    ];
-}
+    // 게시물 데이터를 가져옵니다
+    $posts = $result->fetchAll(PDO::FETCH_ASSOC);
 
+    // 게시물 데이터를 반환
+    return $posts;
+}
 
 function addPost($title, $content, $cpu_manufacturer, $cpu_name, $system_memory_multiplier, $infinity_fabric_frequency, $uclk_div1_mode, $vcore_soc, $cpu_vddio_mem, $ddr_vdd_voltage, $ddr_vddq_voltage, $vddp, $cas_latency, $trcd, $trp, $tras, $trc, $twr, $tref, $trfc1, $trfc2, $trfcsb, $trtp, $trrd_l, $trrd_s, $tfaw, $twtrl, $twtrs, $trdrd_scl, $trdrdsc, $trdrdsd, $trdrddd, $twrwr_scl, $twrwrsc, $twrwrsd, $twrwrd, $twrrd, $trdwr, $gear_down_mode, $power_down_mode, $author, $memo) {
     global $pdo;

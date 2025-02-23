@@ -26,9 +26,17 @@
     function toggleSidebar() {
         const sidebar = document.querySelector('header.sidebar');
         const content = document.querySelector('.content');
+        const toggleBtn = document.querySelector('.toggle-btn'); // 버튼을 선택
 
         sidebar.classList.toggle('collapsed');
         content.classList.toggle('collapsed');
+
+        // 사이드바가 접힐 때 버튼 숨기기
+        if (sidebar.classList.contains('collapsed')) {
+            toggleBtn.style.display = 'none'; // 버튼 숨기기
+        } else {
+            toggleBtn.style.display = 'block'; // 버튼 보이기
+        }
     }
 </script>
 
