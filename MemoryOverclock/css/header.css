@@ -1,7 +1,7 @@
 /* 기본 사이드바 스타일 */
 header.sidebar {
     width: 250px;
-    background-color: #2c3e50;
+    background: linear-gradient(180deg, #2f3c58 0%, #1b2a38 100%);
     color: #fff;
     position: fixed;
     height: 100vh;
@@ -10,12 +10,14 @@ header.sidebar {
     align-items: center;
     padding-top: 20px;
     z-index: 999;
-    transition: width 0.3s ease;
+    transition: width 0.3s ease, background-color 0.3s ease;
+    overflow-y: auto;
 }
 
 /* 사이드바가 접혔을 때 */
 header.sidebar.collapsed {
     width: 80px;
+    background: linear-gradient(180deg, #1c2a38 0%, #314e68 100%);
 }
 
 /* 네비게이션 리스트 */
@@ -23,32 +25,51 @@ header.sidebar nav ul {
     list-style: none;
     width: 100%;
     padding-left: 0;
+    margin-top: 40px;
 }
 
 header.sidebar nav ul li {
     width: 100%;
     text-align: center;
     margin-bottom: 15px;
-    transition: opacity 0.3s ease, display 0.3s ease; /* 애니메이션 추가 */
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    background-color: transparent;
+    box-shadow: none;
+    border:none;
 }
 
-/* 사이드바 접혔을 때 메뉴 텍스트 숨기기 */
 header.sidebar.collapsed nav ul li a {
     opacity: 0;
     pointer-events: none;
     transition: opacity 0.3s ease;
 }
 
-/* 사이드바 접혔을 때 메뉴 아이콘 표시 */
 header.sidebar.collapsed nav ul li a:before {
-    content: '☰'; /* 아이콘 표시 */
-    font-size: 20px;
+    content: '☰';
+    font-size: 22px;
+    color: #fff;
     opacity: 1;
+    transition: opacity 0.3s ease;
 }
 
-/* 사이드바가 접혔을 때 메뉴 항목 숨기기 */
-header.sidebar.collapsed nav ul li {
-    display: none;
+/* 메뉴 항목 기본 스타일 */
+header.sidebar nav ul li a {
+    font-size: 18px;
+    color: #ecf0f1;
+    text-decoration: none;
+    font-weight: bold;
+    display: block;
+    padding: 10px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+header.sidebar nav ul li a:hover {
+    background-color: #16a085;
+    color: white;
+    text-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    transition: text-shadow 0.3s ease, box-shadow 0.3s ease;
 }
 
 /* 사이드바 토글 버튼 */
@@ -58,24 +79,82 @@ header.sidebar .toggle-btn {
     color: white;
     font-size: 30px;
     position: absolute;
-    top: 20px;
-    left: 15px;
+    top: 40px;
+    left: 5px;
     cursor: pointer;
     z-index: 1000;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+header.sidebar .toggle-btn:hover {
+    transform: rotate(90deg);
+}
+
+header.sidebar.collapsed nav ul li {
+    display: none;
+}
+
+#home {
+    font-size: 32px;
+    font-weight: bold;
+    color: transparent;
+    background-image: linear-gradient(45deg, #ff6b81, #ffd700, #4caf50); /* 그라디언트 색상 */
+    background-clip: text;
+    display: inline-block;
+    text-decoration: none;
+    position: relative;
+    padding: 5px 10px;
+    transition: transform 0.3s ease, text-shadow 0.3s ease;
+    letter-spacing: 1px;
+    white-space: nowrap;
+}
+
+#home:hover {
+    transform: scale(1.1);
+    text-shadow: 0 0 8px rgba(255, 255, 255, 0.8), 0 0 20px rgba(255, 255, 255, 0.8);
+}
+
+#home:active {
+    transform: scale(1.05);
+}
+
+#home::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
     transition: opacity 0.3s ease;
 }
 
-/* 메인 콘텐츠 */
-.content {
-    margin-left: 250px;
-    padding: 20px;
-    background-color: #f4f4f4;
-    min-height: 100vh;
-    overflow-y: auto;
-    flex-grow: 1;
-    transition: margin-left 0.3s ease;
+#home:hover::before {
+    opacity: 0;
 }
 
-.content.collapsed {
-    margin-left: 80px;
+header.sidebar.collapsed #home {
+    white-space: normal;
+    font-size: 22px;
+    text-align: center;
+    line-height: 1.2;
+}
+
+header.sidebar.collapsed #home .text-part {
+    display: block;
+}
+
+@media (max-width: 768px) {
+    header.sidebar {
+        width: 60px;
+        background-color: #34495e;
+    }
+
+    header.sidebar.collapsed {
+        width: 60px;
+    }
+
+    header.sidebar nav ul li a {
+        font-size: 16px;
+    }
 }

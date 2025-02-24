@@ -9,15 +9,18 @@
 <body>
 <header class="sidebar">
     <div class="logo">
-        <a href="/">홈페이지</a>
+        <a id="home" href="index.php">
+            <span class="text-part">Over</span><span class="text-part">Clock</span>
+        </a>
+
     </div>
     <button class="toggle-btn" onclick="toggleSidebar()">☰</button> <!-- 버튼 추가 -->
     <nav>
         <ul>
-            <li><a href="/">홈</a></li>
+            <li><a href="post.php">홈</a></li>
             <li><a href="/about.php">소개</a></li>
             <li><a href="/services.php">서비스</a></li>
-            <li><a href="/contact.php">연락처</a></li>
+            <li><a href="https://cofgame.tistory.com" target="_blank">블로그 이동</a></li>
         </ul>
     </nav>
 </header>
