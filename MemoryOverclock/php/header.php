@@ -18,8 +18,8 @@
     <nav>
         <ul>
             <li><a href="post.php">홈</a></li>
-            <li><a href="/about.php">소개</a></li>
-            <li><a href="/services.php">서비스</a></li>
+            <li><a href="/chat.php">정보</a></li>
+            <li><a href="/services.php">채팅</a></li>
             <li><a href="https://cofgame.tistory.com" target="_blank">블로그 이동</a></li>
         </ul>
     </nav>
