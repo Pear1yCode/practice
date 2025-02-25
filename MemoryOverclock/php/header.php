@@ -17,9 +17,9 @@
     <button class="toggle-btn" onclick="toggleSidebar()">☰</button> <!-- 버튼 추가 -->
     <nav>
         <ul>
-            <li><a href="post.php">홈</a></li>
-            <li><a href="/info.php">정보</a></li>
-            <li><a href="/chat.php">채팅</a></li>
+            <li><a href="post.php">메모리</a></li>
+            <li><a href="info.php">정보</a></li>
+            <li><a href="chat.php">채팅</a></li>
             <li><a href="https://cofgame.tistory.com" target="_blank">블로그 이동</a></li>
         </ul>
     </nav>
@@ -34,11 +34,10 @@
         sidebar.classList.toggle('collapsed');
         content.classList.toggle('collapsed');
 
-        // 사이드바가 접힐 때 버튼 숨기기
         if (sidebar.classList.contains('collapsed')) {
-            toggleBtn.style.display = 'none'; // 버튼 숨기기
+            toggleBtn.style.display = 'none';
         } else {
-            toggleBtn.style.display = 'block'; // 버튼 보이기
+            toggleBtn.style.display = 'block';
         }
     }
 </script>

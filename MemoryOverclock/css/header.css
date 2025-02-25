@@ -1,7 +1,7 @@
 /* 기본 사이드바 스타일 */
 header.sidebar {
     width: 250px;
-    background: linear-gradient(180deg, #2f3c58 0%, #1b2a38 100%);
+    background: linear-gradient(180deg, #1e3d34 0%, #2f5c50 100%);
     color: #fff;
     position: fixed;
     height: 100vh;
