@@ -44,3 +44,11 @@ CREATE TABLE memory_overclock (
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,       -- 작성일시
     memo TEXT                              -- 비고 (자유 입력, 기본값 'auto')
 );
+
+CREATE TABLE information (
+    id INT AUTO_INCREMENT PRIMARY KEY,  -- 고유 ID
+    title VARCHAR(255) NOT NULL,        -- 글 제목
+    content TEXT NOT NULL,              -- 글 내용
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP  -- 글쓴 날짜 (기본값 현재 시간)
+);
+
