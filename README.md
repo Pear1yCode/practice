@@ -5,3 +5,5 @@ memory overclock - view
 memory overclock - details
 
 memory overclock - write
+
+memory overclock - rewrite
