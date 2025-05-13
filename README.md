@@ -7,3 +7,5 @@ memory overclock - details
 memory overclock - write
 
 memory overclock - rewrite
+
+memory overclock - delete
