@@ -11,3 +11,5 @@ memory overclock - rewrite
 memory overclock - delete
 
 memory overclock - main
+
+memory overclock - navigate tab
