@@ -1,4 +1,5 @@
 memory overclock - home
+* memory news
 
 memory overclock - view
 
