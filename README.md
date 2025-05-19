@@ -2,6 +2,8 @@ memory overclock - home
 * memory news
 
 memory overclock - view
+* Intel
+* AMD
 
 memory overclock - details
 
