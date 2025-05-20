@@ -3,7 +3,9 @@ memory overclock - home
 
 memory overclock - view
 * Intel
+-value
 * AMD
+-value
 
 memory overclock - details
 
