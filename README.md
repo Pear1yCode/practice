@@ -19,3 +19,4 @@ memory overclock - main
 
 memory overclock - navigate tab 
 * home button
+* view
