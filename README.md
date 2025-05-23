@@ -21,3 +21,4 @@ memory overclock - navigate tab
 * home button
 * view
 * tips
+* issue
