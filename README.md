@@ -23,3 +23,4 @@ memory overclock - navigate tab
 * tips
 * issue
 * optimize
+* help
