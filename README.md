@@ -18,10 +18,9 @@ memory overclock - delete
 memory overclock - main
 
 memory overclock - navigate tab 
-* home button
+* home
 * view
 * tips
 * issue
 * optimize
 * help
-* hm
