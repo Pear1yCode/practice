@@ -17,10 +17,12 @@ memory overclock - delete
 
 memory overclock - main
 
-memory overclock - navigate tab 
+memory overclock - navigate tab or header
 * home
 * view
 * tips
 * issue
 * optimize
 * help
+
+footer
