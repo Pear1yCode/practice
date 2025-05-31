@@ -26,6 +26,6 @@ memory overclock - navigate (left)
 * help
 
 header
-* logo
+* logo (hover)
 
 footer
