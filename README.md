@@ -27,5 +27,8 @@ memory overclock - navigate (left)
 
 header
 * logo (hover)
+* function
 
 footer
+
+button (sticky?)
