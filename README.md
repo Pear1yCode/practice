@@ -33,7 +33,6 @@ footer
 
 button (sticky?)
 design
+up button
+home button
 new function
-new function2
-new function3
-?
