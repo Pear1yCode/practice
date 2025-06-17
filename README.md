@@ -35,5 +35,5 @@ button (sticky?)
 design
 up button
 home button
-new function
-new function
+
+news?
