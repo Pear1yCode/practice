@@ -36,5 +36,5 @@ design
 up button
 home button
 
-other??
+other
 other
