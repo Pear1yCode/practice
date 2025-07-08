@@ -37,4 +37,3 @@ up button
 home button
 
 other
-other
