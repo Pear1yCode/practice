@@ -34,4 +34,4 @@ footer
 button (sticky?)
 design
 up button
-home butt
+home button
