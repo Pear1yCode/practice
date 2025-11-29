@@ -36,5 +36,4 @@ design
 up button
 home button
 
-tttttttttttttttttttttttt
-t
+tttttttttttttttttttttttttt
