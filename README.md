@@ -36,4 +36,5 @@ design
 up button
 home button
 
-tttttttttttttttttttttttttttttttt
+251208 run ok
+251209 run 
