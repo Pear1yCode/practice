@@ -52,3 +52,6 @@ home button
 251221 rest
 251222 run ok
 251223 rest - rain & snow
+251224 run ok x2 intensity
+going walk coming run
+251225
