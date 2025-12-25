@@ -54,4 +54,4 @@ home button
 251223 rest - rain & snow
 251224 run ok x2 intensity
 going walk coming run
-251225
+251225 run ok I have pain in my knee -> Buy knee pads
