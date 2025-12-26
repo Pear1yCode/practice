@@ -55,5 +55,5 @@ home button
 251224 run ok x2 intensity
 going walk coming run
 251225 run ok I have pain in my knee -> Buy knee pads
-251226 rest
-251227 run
+251226 run ok + use knee pads
+251227 
