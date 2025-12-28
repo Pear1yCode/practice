@@ -57,3 +57,5 @@ going walk coming run
 251225 run ok I have pain in my knee -> Buy knee pads
 251226 run ok + use knee pads
 251227 rest
+251228 rest
+251229
