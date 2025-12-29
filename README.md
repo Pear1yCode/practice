@@ -58,4 +58,5 @@ going walk coming run
 251226 run ok + use knee pads
 251227 rest
 251228 rest
-251229
+251229 run ok
+251230 
