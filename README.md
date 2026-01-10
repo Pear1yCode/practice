@@ -70,4 +70,5 @@ going walk coming run
 260107 run ok
 260108 run ok
 260109 run ok
-260110
+260110 rest
+26
