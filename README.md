@@ -72,3 +72,4 @@ going walk coming run
 260109 run ok
 260110 rest
 260111 rest
+260112 snow
