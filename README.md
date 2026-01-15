@@ -74,4 +74,5 @@ going walk coming run
 260111 rest
 260112 snow
 260113 frozen
-260114 run ok x2.5 intesity
+260114 run ok x2.5 intensity
+260115 run ok x2.5 intensity
