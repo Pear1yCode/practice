@@ -76,3 +76,4 @@ going walk coming run
 260113 frozen
 260114 run ok x2.5 intensity
 260115 run ok x2.5 intensity
+260116 rest
