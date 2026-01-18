@@ -77,3 +77,4 @@ going walk coming run
 260114 run ok x2.5 intensity
 260115 run ok x2.5 intensity
 260116 rest
+260117 rest
