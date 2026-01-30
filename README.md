@@ -76,17 +76,19 @@ going walk coming run
 260113 frozen
 260114 run ok x2.5 intensity
 260115 run ok x2.5 intensity
-260116 rest
+260116 run ok
 260117 rest
-260118 run ok
+260118 rest
 260119 run ok
 260120 run ok
 260121 run ok
 260122 run ok
-260123 rest
+260123 run ok
 260124 rest
-260125 run ok
+260125 rest
 260126 run ok
 260127 run ok
 260128 run ok
 260129 run ok
+260130 run ok
+260131
