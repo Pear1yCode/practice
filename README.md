@@ -93,3 +93,4 @@ going walk coming run
 260130 run ok
 260131 rest
 260201 rest
+260202 run ok
