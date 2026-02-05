@@ -95,4 +95,5 @@ going walk coming run
 260201 rest
 260202 run ok
 260203 walk
-26024 run ok x2 intensity
+260204 run ok x2 intensity
+260205 run ok
