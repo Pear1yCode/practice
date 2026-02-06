@@ -97,3 +97,5 @@ going walk coming run
 260203 walk
 260204 run ok x2 intensity
 260205 run ok
+260206 run ok
+260207 
