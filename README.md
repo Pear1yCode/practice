@@ -121,4 +121,5 @@ going walk coming run
 260227 run ok
 260228 rest
 260301 rest 🇰🇷
-260302 
+260302 rain & snow
+260303 
