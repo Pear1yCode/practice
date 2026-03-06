@@ -124,4 +124,4 @@ going walk coming run
 260302 rain
 260303 run ok
 260304 rain
-260305 
+260305 run ok
