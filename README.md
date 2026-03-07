@@ -38,94 +38,95 @@ home button
 
 ## 기록
 251208 run ok <br>
-251209 run ok
-251210 run ok
-251211 run ok
-251212 run ok
-251213 rest
-251214 rest
-251215 run ok
-251216 run ok
-251217 run ok
-251218 run ok
-251219 run ok
-251220 rest
-251221 rest
-251222 run ok
-251223 rest - rain & snow
-251224 run ok x2 intensity
-going walk coming run
-251225 run ok I have pain in my knee -> Buy knee pads
-251226 run ok + use knee pads
-251227 rest
-251228 rest
-251229 run ok
-251230 run ok
-251231 run ok
-260101 run ok
-260102 run ok
-260103 rest
-260104 rest
-260105 run ok
-260106 run ok
-260107 run ok
-260108 run ok
-260109 run ok
-260110 rest
-260111 rest
-260112 snow
-260113 frozen
-260114 run ok x2.5 intensity
-260115 run ok x2.5 intensity
-260116 run ok
-260117 rest
-260118 rest
-260119 run ok
-260120 run ok
-260121 run ok
-260122 run ok
-260123 run ok
-260124 rest
-260125 rest
-260126 run ok
-260127 run ok
-260128 run ok
-260129 run ok
-260130 run ok
-260131 rest
-260201 rest
-260202 run ok
-260203 walk
-260204 run ok x2 intensity
-260205 run ok
-260206 run ok
-260207 rest
-260208 rest
-260209 run ok
-260210 run ok
-260211 run ok
-260212 run ok
-260213 run ok
-260214 rest
-260215 rest
-260216 run ok
-260217 run ok
-260218 run ok
-260219 run ok
-260220 run ok
-260221 rest
-260222 rest
-260223 run ok
-260224 run ok
-260225 run ok
-260226 run ok
-260227 run ok
-260228 rest
-260301 rest 🇰🇷
-260302 rain
-260303 run ok
-260304 run ok
-260305 rain
-260306 run ok
-260307 rest
-260308 
+251209 run ok <br>
+251210 run ok <br>
+251211 run ok <br>
+251212 run ok <br>
+251213 rest <br>
+251214 rest <br>
+251215 run ok <br>
+251216 run ok <br>
+251217 run ok <br>
+251218 run ok <br>
+251219 run ok <br>
+251220 rest <br>
+251221 rest <br>
+251222 run ok <br>
+251223 rest - rain & snow <br>
+251224 run ok x2 intensity <br>
+going walk coming run <br>
+251225 run ok I have pain in my knee -> Buy knee pads <br>
+251226 run ok + use knee pads <br>
+251227 rest <br>
+251228 rest <br>
+251229 run ok <br>
+251230 run ok <br>
+251231 run ok <br>
+260101 run ok <br>
+260102 run ok <br>
+260103 rest <br>
+260104 rest <br>
+260105 run ok <br>
+260106 run ok <br>
+260107 run ok <br>
+260108 run ok <br>
+260109 run ok <br>
+260110 rest <br>
+260111 rest <br>
+260112 snow <br>
+260113 frozen <br>
+260114 run ok x2.5 intensity <br>
+260115 run ok x2.5 intensity <br>
+260116 run ok <br>
+260117 rest <br>
+260118 rest <br>
+260119 run ok <br>
+260120 run ok <br>
+260121 run ok <br>
+260122 run ok <br>
+260123 run ok <br>
+260124 rest <br>
+260125 rest <br>
+260126 run ok <br>
+260127 run ok <br>
+260128 run ok <br>
+260129 run ok <br>
+260130 run ok <br>
+260131 rest <br>
+260201 rest <br>
+260202 run ok <br>
+260203 walk <br>
+260204 run ok x2 intensity <br>
+260205 run ok <br>
+260206 run ok <br>
+260207 rest <br>
+260208 rest <br>
+260209 run ok <br>
+260210 run ok <br>
+260211 run ok <br>
+260212 run ok <br>
+260213 run ok <br>
+260214 rest <br>
+260215 rest <br>
+260216 run ok <br>
+260217 run ok <br>
+260218 run ok <br>
+260219 run ok <br>
+260220 run ok <br>
+260221 rest <br>
+260222 rest <br>
+260223 run ok <br>
+260224 run ok <br>
+260225 run ok <br>
+260226 run ok <br>
+260227 run ok <br>
+260228 rest <br>
+260301 rest 🇰🇷 <br>
+260302 rain <br>
+260303 run ok <br>
+260304 run ok <br>
+260305 rain <br>
+260306 run ok <br>
+260307 rest <br>
+260308 rest <br>
+2603
