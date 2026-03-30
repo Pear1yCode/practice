@@ -150,4 +150,4 @@ going walk coming run <br>
 260327 run ok <br>
 260328 rest <br>
 260329 rest <br>
-260330
+260330 rain <br>
