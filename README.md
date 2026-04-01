@@ -152,4 +152,5 @@ going walk coming run <br>
 260329 rest <br>
 260330 rain <br>
 260331 test & walk & mini run <br>
-260401 
+260401 run ok <br>
+260402 
