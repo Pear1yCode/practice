@@ -157,5 +157,5 @@ going walk coming run <br>
 260403 travel <br>
 260404 travel & rest <br>
 260405 rest <br>
-260406 walk <br>
-260407 
+260406 walk & run <br>
+260407 run
