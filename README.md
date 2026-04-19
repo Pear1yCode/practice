@@ -168,4 +168,4 @@ going walk coming run <br>
 260414 run ok <br>
 260415 run & stair climbing 16th
 260416 run ok <br>
-260417 
+260417 rest <br>
