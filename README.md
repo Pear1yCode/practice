@@ -183,3 +183,9 @@ going walk coming run <br>
 260429 walk <br>
 260430 walk <br>
 260501 walk <br>
+260502 rest <br>
+260503 rest <br>
+260504 rest <br>
+260505 rest <br>
+260506 walk <br>
+260507 
