@@ -189,4 +189,9 @@ going walk coming run <br>
 260505 rest <br>
 260506 walk <br>
 260507 walk <br>
-260508 
+260508 walk <br>
+260509 rest <br>
+260510 rest <br>
+260511 rain <br>
+260512 walk <br>
+260513 
